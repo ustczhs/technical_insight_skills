@@ -12,8 +12,8 @@ disable-model-invocation: true
 # SoC Shortlist (Phase 2)
 
 技术端 skill：读取 **Brief Ready** 的 Selection Brief，以 **Target Silicon Class 为优先锚**、并做 **相邻类覆盖** 地搜索公开资料，产出 **SoC Shortlist**（+ 必要时 **Near-Miss**）。  
-允许有限的 **Phase 2 Clarification**（含按需 **Spec Detail Probe**，见 CONTEXT.md），**不是**产品维度重 grill。  
-术语：[CONTEXT.md](../../../CONTEXT.md)。证据：[shared/evidence-rules.md](../../../shared/evidence-rules.md)。探针启发式：[shared/phase2-spec-probes.md](../../../shared/phase2-spec-probes.md）。
+允许有限的 **Phase 2 Clarification**（含按需 **Spec Detail Probe**，见本簇 CONTEXT.md），**不是**产品维度重 grill。  
+术语：[CONTEXT.md](../CONTEXT.md)。证据：[shared/evidence-rules.md](../shared/evidence-rules.md)。探针启发式：[shared/phase2-spec-probes.md](../shared/phase2-spec-probes.md）。
 
 ## Principles
 
@@ -24,9 +24,9 @@ disable-model-invocation: true
 
 ## Before you start
 
-1. Read CONTEXT.md and evidence-rules.md
+1. Read 本簇 [CONTEXT.md](../CONTEXT.md) and [evidence-rules.md](../shared/evidence-rules.md)
 2. Load the Brief（路径由用户给出，或 `selection/<slug>/SELECTION_BRIEF.md`）
-3. Read [shared/shortlist-template.md](../../../shared/shortlist-template.md) and skim [shared/phase2-spec-probes.md](../../../shared/phase2-spec-probes.md)
+3. Read [shared/shortlist-template.md](../shared/shortlist-template.md) and skim [shared/phase2-spec-probes.md](../shared/phase2-spec-probes.md)
 4. **Refuse** full Phase 2 if 文首元信息表 `brief_status` ≠ `brief_ready` — 列出缺口，让产品端回 `hardware-selection-brief`
 
 ## Workflow
@@ -79,7 +79,7 @@ Phase 2 Progress:
 硬件选型常卡在 Brief 未写的硅片细节。在初搜之后、定稿 Hard 过滤之前：
 
 1. 从 Brief 确定 **probe_pack** = Family + `sub_form`（及 Extension）  
-2. **只打开** [phase2-spec-probes.md](../../../shared/phase2-spec-probes.md) 中对应形态包做缺口扫描  
+2. **只打开** [phase2-spec-probes.md](../shared/phase2-spec-probes.md) 中对应形态包做缺口扫描  
 3. 跨包提问视为违规（例如用 OWS 的 SRAM 问卷替代机器人的串口/显示通道）
 
 **必须追问**（在形态包内满足任一即发起，仍一次一问）：

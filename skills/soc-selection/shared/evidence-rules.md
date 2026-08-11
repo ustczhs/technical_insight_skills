@@ -1,6 +1,6 @@
 # Evidence Rules (Phase 2)
 
-Aligned with `ai_hardware_insight`, with a longer freshness window for silicon.
+本簇 Phase 2 证据规则。等级符号与常见技术规划写法一致（A/B/C）；时效窗口按硅片长生命周期放宽（见下）。完整术语见本簇 [CONTEXT.md](../CONTEXT.md)。
 
 ## Evidence Grade
 

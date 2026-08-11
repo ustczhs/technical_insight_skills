@@ -10,8 +10,8 @@ disable-model-invocation: true
 
 # Hardware Selection Brief (Phase 1)
 
-产品端 skill：把产品概念收敛为 **Selection Brief**，供 `soc-shortlist` 使用。  
-**不是**完整 PRD。术语以仓库根目录 [CONTEXT.md](../../../CONTEXT.md) 为准。
+产品端 skill：把产品概念收敛为 **Selection Brief**，供同簇 `soc-shortlist` 使用。  
+**不是**完整 PRD。术语以本簇 [CONTEXT.md](../CONTEXT.md) 为准。
 
 ## Principles
 
@@ -21,8 +21,8 @@ disable-model-invocation: true
 
 ## Before you start
 
-1. Read [CONTEXT.md](../../../CONTEXT.md)
-2. Read the Brief template: [shared/brief-template.md](../../../shared/brief-template.md)
+1. Read [CONTEXT.md](../CONTEXT.md)
+2. Read the Brief template: [shared/brief-template.md](../shared/brief-template.md)
 3. Ask **one Dimension Turn at a time**; for each turn give a **recommended answer** and **recommended constraint grade**
 4. Do not start Phase 2 search here — hand off when Brief Ready
 
@@ -50,8 +50,8 @@ Phase 1 Progress:
 
 | Family | Profile |
 |--------|---------|
-| Companion Robot | [shared/profiles/companion-robot.md](../../../shared/profiles/companion-robot.md) |
-| Wearable AI | [shared/profiles/wearable-ai.md](../../../shared/profiles/wearable-ai.md) |
+| Companion Robot | [shared/profiles/companion-robot.md](../shared/profiles/companion-robot.md) |
+| Wearable AI | [shared/profiles/wearable-ai.md](../shared/profiles/wearable-ai.md) |
 
 若都不贴：标 **Out-of-Family**，可轻量 grill，但明示 Phase 2 质量不保证，并建议扩展 Profile。
 

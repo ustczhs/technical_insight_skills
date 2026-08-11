@@ -27,7 +27,7 @@
 
 ## 1b. Spec Detail Probe 记录
 
-本轮按需探针（无则写「无触发」）。须写明形态包。每一行为一次 **Probe Turn**（取值 + grade）。启发式见 `shared/phase2-spec-probes.md`。
+本轮按需探针（无则写「无触发」）。须写明形态包。每一行为一次 **Probe Turn**（取值 + grade）。启发式见同目录 [phase2-spec-probes.md](./phase2-spec-probes.md)。
 
 | 字段 | 值 |
 |------|-----|
