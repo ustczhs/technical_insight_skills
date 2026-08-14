@@ -14,11 +14,16 @@
 | product_name | |
 | product_slug | |
 | product_family | companion_robot / wearable_ai / out_of_family |
-| target_silicon_class | |
+| application_domains | 例：motorcycle, light_ev |
+| primary_silicon_class | 例：display_mcu |
+| adjacent_silicon_classes | 例：vehicle_soc, industrial_mcu |
+| needs_seed_extension | false |
+| target_silicon_class | （可读说明：主类 + 相邻 + 理由；权威以三列枚举为准） |
 | created | YYYY-MM-DD |
 | updated | YYYY-MM-DD |
 
-`brief_status`：`draft` \| `brief_ready`
+`brief_status`：`draft` \| `brief_ready`  
+`application_domains` / Silicon Class id 见 `shared/application-domains.md`、`shared/silicon-classes.md`。
 
 ## 1. 产品概念（选型所需最小描述）
 
@@ -32,11 +37,29 @@
 | 推断理由 | … |
 | 产品确认 | 是 / 否（修订说明） |
 
-若 `out_of_family`：说明降级风险；Phase 2 不保证质量。
+若 `out_of_family`：说明仅为 **Profile/问卷缺口**；Phase 2 检索仍按 Silicon Class ∪ Application Domain 执行。
+
+## 2b. Application Domain
+
+| 项 | 内容 |
+|----|------|
+| 选定 | 域 id 列表（可多选） |
+| 推断理由 | 从产品概念/标题 |
+| 产品确认 | 是 / 否 |
+| needs_seed_extension | 自定义域未入词表时为 true |
+
+「优先某某行业芯片」必须落在本表，不要只写 Soft 散文。
 
 ## 3. Target Silicon Class
 
-本族**默认优先类** + **相邻类覆盖**说明（Phase 2 须检索可能满足 Hard 的跨形态主控，例如视觉 SoC / 眼镜芯片用于机器人或耳机；勿把默认类写成唯一门禁）。
+| 项 | 内容 |
+|----|------|
+| primary | 一个 Silicon Class id |
+| adjacent | 0～N 个 id（含 Hard 触发复核结果） |
+| 可读说明 | 默认优先类 + 相邻覆盖理由 |
+| 产品确认 | 早选主类已确认；Ready 前相邻类已复核 |
+
+Phase 2 打开 `vendor-seeds` 的 **Class 段 ∪ Domain 加扫**；勿暗示只能搜某一 Family 的旧矩阵。
 
 ## 4. Dimensions
 
@@ -65,7 +88,7 @@ Core 必须全部出现；已触发的 Extension 同样。每维一行主表；�
 
 ## 6. Soft Preferences（汇总）
 
-抽出 `grade=soft` 项，供 Match Band。
+抽出 `grade=soft` 项，供 Match Band。行业优先应已由 Application Domain 消化。
 
 ## 7. Unconstrained
 
@@ -74,9 +97,33 @@ Core 必须全部出现；已触发的 Extension 同样。每维一行主表；�
 ## 8. Brief Ready 检查
 
 - [ ] Product Family 已确认（或 Out-of-Family 已明示）
-- [ ] Profile 内全部 Core 均有 Dimension Answer
+- [ ] Application Domain 已确认（含自定义时的 needs_seed_extension）
+- [ ] primary_silicon_class 已确认；adjacent 已按 Hard 复核
+- [ ] Profile 内全部 Core 均有 Dimension Answer（Out-of-Family 则为其轻量维）
 - [ ] 已纳入的 Extension 均有 Dimension Answer
 - [ ] 每项等级已在 Dimension Turn 中确认
 - [ ] Framing–Spec Mapping 均已写明
 
 全部勾选后将元信息表 `brief_status` 设为 `brief_ready`。
+
+## 9. 源溯源附录
+
+本附录供交接审计；**不构成** Hard Constraint / Soft Preference。Phase 2 只消费 §5 / §6 与元信息中的 Class/Domain。
+
+### 9.1 Brief Source 清单
+
+| 文件名 | 相对路径 | 备注 |
+|--------|----------|------|
+| （无） | | |
+
+### 9.2 Source Residue（未映射摘录）
+
+| 来源文件 | 摘录摘要 | 处理 |
+|----------|----------|------|
+| （无） | | 未映射 / 未能抽取 / 已提议 Extension：… |
+
+### 9.3 冲突裁定
+
+| 维度 id | 各方摘录 | 用户裁定 |
+|---------|----------|----------|
+| （无） | | |

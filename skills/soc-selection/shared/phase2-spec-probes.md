@@ -8,19 +8,26 @@
 
 ## 0. 形态门控（先做再问）
 
-探针必须跟 **Product Family + Brief 的 `sub_form`（及已触发 Extension）** 对齐：
+探针必须跟 **Silicon Class**（主类；可用 `sub_form` / Extension 细化）对齐，**不要**按 Product Family 选包：
 
-1. 从 Brief 读出 `product_family`、`sub_form`、视觉/显示/移动等相关 Hard  
-2. **只加载**下方对应形态包；禁止拿耳机包去问机器人，也禁止拿机器人串口包去问 OWS  
-3. 在包内再按「通用触发」决定追问哪些；一次一问  
-4. 问法用**技术规格选项**（通道数、接口类型、UART 数量档），不要改成 Phase 1 体验 Framing  
-5. 对跨品类候选，仍用**本产品**形态包的探针口径对照其手册，而非改用其原营销形态的体验问卷
+1. 从 Brief 读出 `primary_silicon_class`、`adjacent_silicon_classes`、相关 Hard，以及可选的 `sub_form`
+2. **只加载**下方与主 Class（及确有分叉时的相邻 Class）对应的探针包；禁止用 `audio_sip` 包去问 `display_mcu` 方案
+3. 在包内再按「通用触发」决定追问哪些；一次一问
+4. 问法用**技术规格选项**（通道数、接口类型、UART 数量档），不要改成 Phase 1 体验 Framing
+5. 对跨 Class 候选，仍用**本产品主 Class**探针口径对照其手册
 
-| Family | 形态包入口 |
-|--------|------------|
-| `wearable_ai` | §2：按 OWS / 入耳 / 眼镜 / 腕戴 |
-| `companion_robot` | §3：按桌面固定 / 室内移动 / 车载 |
-| `out_of_family` | 先声明降级；仅挑与概念明显相关的少量探针 |
+| primary_silicon_class | 形态包入口 |
+|----------------------|------------|
+| `audio_sip` / `wifi_bt_combo` | §2：按 OWS / 入耳 / 眼镜 / 腕戴（可参考 Domain / sub_form） |
+| `ap_som` / `lightweight_ap` | §3：按桌面 / 室内移动 / 车载 sub_form |
+| `vision_soc` | §3.1 视觉相关探针 + §2.1 若有 ISP 分叉 |
+| `vehicle_soc` | §3.4 车载 + 按需 §5 |
+| `display_mcu` | §5 |
+| `industrial_mcu` | §5（偏 UART/ADC/温宽） |
+| 未登记 / `needs_seed_extension` | 声明扩展；仅挑与 Hard 明显相关的少量探针 |
+
+记录格式：`probe_pack = <primary_silicon_class>[/<sub_form>]`，例如 `display_mcu` 或 `ap_som/vehicle-mounted`。
+
 
 ## 1. 通用触发
 
@@ -120,7 +127,8 @@
 
 ## 4. 记录格式（写入 Shortlist）
 
-须注明本轮加载的形态包，例如：`probe_pack = companion_robot/indoor_mobile`。
+须注明本轮加载的形态包，例如：`probe_pack = display_mcu` 或 `ap_som/indoor_mobile`。  
+落盘位置：`SOC_SHORTLIST.md` 的**过程附录**（探针全表）；§1 结论区只保留一行摘要。详见 [shortlist-template.md](./shortlist-template.md)。
 
 | probe_id | answer | grade | 影响 |
 |----------|--------|-------|------|
@@ -136,3 +144,19 @@
 - `B / Soft`
 - `自定义：SRAM>2Mb / Hard`
 - `U / Unconstrained`
+
+## 5. Display / Industrial MCU（`display_mcu` / `industrial_mcu`）
+
+小屏 HMI、表情屏、宽温控制主控：重点在 **显示接口、外设数量、片上内存、温宽与 RTOS**，不要默认套 `ap_som` 的 CSI/NPU 包。
+
+| probe_id | 何时值得问 | Spec 口径示例 | 默认推荐倾向 |
+|----------|------------|---------------|--------------|
+| `display_channels` | LVDS/RGB/MIPI 与候选分叉 | 1×LVDS / RGB565 / MIPI-DSI | 跟 Brief 显示维 |
+| `uart_count` | 舵机/模组/调试占口 | ≥2 / ≥4 | 跟控制 IO |
+| `adc_count` | 模拟采样需求 | ≥2 / unconstrained | 跟 Brief |
+| `sram_psram` | 帧缓冲/资源是否够 | sram_band / psram_required | 表情屏常要 PSRAM |
+| `storage_iface` | NAND/NOR/eMMC 启动 | spi_nand_ok / eMMC | 跟 hs_io |
+| `usb_host_device` | USB 角色 | host / device / otg | 跟 Brief |
+| `rtos_sdk` | 仅 Linux 证据 vs RTOS | rtos_required / linux_ok | 跟 sw_stack |
+| `temp_grade` | 工业/车载温区 OPN | minus30_85 / aecq | 跟 environment |
+

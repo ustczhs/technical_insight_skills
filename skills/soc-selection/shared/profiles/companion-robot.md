@@ -1,8 +1,10 @@
 # Dimension Profile: Companion Robot
 
-**Product Family**: Companion Robot  
-**Target Silicon Class**: AP / SoM 为主（**优先锚**）  
-**相邻类覆盖（Phase 2 须检索）**: 视觉 SoC / AI 眼镜·IPC·运动相机主控 / 低功耗影像 SoC 等——凡可能满足 Brief Hard 的跨形态主控；不得因「非机器人专用 AP」整类排除。类标差异用 Match Band 表达。
+**Product Family**: Companion Robot（**仅问卷**）  
+**推荐 primary Silicon Class**: `ap_som`（可改；权威见 Brief 元信息与 [silicon-classes.md](../silicon-classes.md)）  
+**相邻类**: 由 Hard 触发 + 产品确认写入 `adjacent_silicon_classes`；常见 `vision_soc` 等。
+
+**厂商矩阵**：Phase 2 按 Brief 的 **Silicon Class 段 ∪ Application Domain 加扫**（见 [vendor-seeds.md](../vendor-seeds.md)），**不**再按本 Family 名选表。
 
 ## Core Dimensions
 

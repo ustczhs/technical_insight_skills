@@ -1,5 +1,5 @@
-# Internal / development-only
-docs/
+# Internal / development-only (repo-root only; cluster ADRs live under skills/*/docs/)
+/docs/
 .cursor/
 
 # Runtime outputs when using this repo as a workspace

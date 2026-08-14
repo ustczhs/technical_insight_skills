@@ -15,10 +15,11 @@
 ## 产出
 
 ```
+selection/<slug>/sources/           # Brief Source（可选输入）
 selection/<slug>/SELECTION_BRIEF.md
 ```
 
-文首元信息表 `brief_status` = `brief_ready` 后方可进入 Phase 2。
+外部材料经抽取成为 Source-Derived Draft，须 Dimension Turn 确认后写入 Brief；文首 `brief_status` = `brief_ready` 后方可进入 Phase 2。
 
 ## 与同簇下一 skill
 

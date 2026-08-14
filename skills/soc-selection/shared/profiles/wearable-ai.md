@@ -1,8 +1,10 @@
 # Dimension Profile: Wearable AI
 
-**Product Family**: Wearable AI  
-**Target Silicon Class**: 音频 SoC / SiP / 低功耗主控为主（**优先锚**；经典 AP 不默认排除，按 Hard/封装/功耗 Soft 排序）  
-**相邻类覆盖（Phase 2 须检索）**: 视觉 SoC / AI 眼镜主控 / 轻量 AP·SoM 等——凡可能满足 Brief Hard 的跨形态主控（例如眼镜视觉芯片用于视觉耳机）；不得仅因营销品类整类排除。
+**Product Family**: Wearable AI（**仅问卷**）  
+**推荐 primary Silicon Class**: `audio_sip`（可改；权威见 Brief 元信息与 [silicon-classes.md](../silicon-classes.md)）  
+**相邻类**: 由 Hard 触发 + 产品确认；常见 `vision_soc` / `lightweight_ap`。
+
+**厂商矩阵**：Phase 2 按 Brief 的 **Silicon Class 段 ∪ Application Domain 加扫**（见 [vendor-seeds.md](../vendor-seeds.md)），**不**再按本 Family 名选表。
 
 ## Core Dimensions
 

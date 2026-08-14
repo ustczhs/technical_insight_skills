@@ -9,6 +9,7 @@
 - 已有 Brief Ready 的 `SELECTION_BRIEF.md`，需要候选主控清单
 - 需要按需做 Spec Detail Probe / Uncertainty 追问后再导出
 - Companion Robot / Wearable AI 等族的相邻类覆盖检索
+- 按厂商矩阵（国内 + 国外）扩大默认类覆盖、避免漏扫
 
 显式调用：`/soc-shortlist`（本 skill 默认 `disable-model-invocation`）。
 
@@ -18,7 +19,7 @@
 selection/<slug>/SOC_SHORTLIST.md
 ```
 
-（Brief 通常同目录：`SELECTION_BRIEF.md`。）
+（Brief 通常同目录：`SELECTION_BRIEF.md`。须含**结论先行**的推荐表 + **厂商扫描表**方可 `complete`。）
 
 ## 与同簇上一 skill
 
@@ -27,6 +28,7 @@ selection/<slug>/SOC_SHORTLIST.md
 ## 关键依赖
 
 - [../shared/shortlist-template.md](../shared/shortlist-template.md)
+- [../shared/vendor-seeds.md](../shared/vendor-seeds.md)
 - [../shared/evidence-rules.md](../shared/evidence-rules.md)
 - [../shared/phase2-spec-probes.md](../shared/phase2-spec-probes.md)
 

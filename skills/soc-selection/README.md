@@ -13,13 +13,19 @@
 | 路径 | 用途 |
 |------|------|
 | [CONTEXT.md](./CONTEXT.md) | 本簇领域术语权威 |
-| [shared/](./shared/) | Brief/Shortlist 模板、Dimension Profile、证据规则、Spec Detail Probe |
+| [docs/adr/](./docs/adr/) | 架构决策（含检索与 Family 解耦） |
+| [shared/](./shared/) | 模板、Profile、证据规则、探针、**按 Class/Domain 的 vendor-seeds** |
+| [shared/silicon-classes.md](./shared/silicon-classes.md) | Silicon Class 枚举与 Hard 触发 |
+| [shared/application-domains.md](./shared/application-domains.md) | Application Domain 词表 |
+
+**检索模型**：Product Family 只决定问卷；Phase 2 覆盖 = Silicon Class 矩阵 ∪ Application Domain 加扫 ∪ Hard 触发相邻类。
 
 本地可自建 `examples/` 对照格式（已 gitignore，**勿提交**具体产品 Brief/Shortlist）。叶子 skill 经相对路径读取本簇 `shared/` 与 `CONTEXT.md`；若 symlink 后读不到，见根 [README.md](../../README.md) 的 realpath 提示。
 
 ## 运行时产出
 
 ```
+selection/<slug>/sources/             # Brief Source（Phase 1 输入，可选）
 selection/<slug>/SELECTION_BRIEF.md
 selection/<slug>/SOC_SHORTLIST.md
 ```
