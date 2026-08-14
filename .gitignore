@@ -3,9 +3,12 @@
 .cursor/
 
 # Runtime outputs when using this repo as a workspace
+projects/
+# Legacy flat roots (deprecated write targets; may still exist locally)
 research/
 selection/
 trees/
+requirements/
 
 # Local worked examples (product trees / shortlists — keep private, do not publish)
 skills/*/examples/

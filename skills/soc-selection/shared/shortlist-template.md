@@ -1,6 +1,6 @@
 # SoC Shortlist Template
 
-建议路径：`selection/<product-slug>/SOC_SHORTLIST.md`  
+建议路径：`$PROJECTS_ROOT/<project_slug>/selection/SOC_SHORTLIST.md`  
 输入：同目录 `SELECTION_BRIEF.md`（须元信息表 `brief_status` = `brief_ready`）。  
 **纯 Markdown**：不要 YAML。
 

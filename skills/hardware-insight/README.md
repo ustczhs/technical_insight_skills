@@ -13,13 +13,15 @@
 ## 产出
 
 ```
-research/<产品简称>/
+$PROJECTS_ROOT/<project_slug>/research/
 ├── 调研基调.md
 ├── 竞品列表.md
 ├── 调研/
 ├── 决策摘要.md
 └── output/
 ```
+
+须已有（或当场最小建）`$PROJECTS_ROOT/<project_slug>/PROJECT.md`。
 
 ## 目录结构
 

@@ -11,12 +11,13 @@
 - Companion Robot / Wearable AI 等族的相邻类覆盖检索
 - 按厂商矩阵（国内 + 国外）扩大默认类覆盖、避免漏扫
 
-显式调用：`/soc-shortlist`（本 skill 默认 `disable-model-invocation`）。
+显式调用：`/soc-shortlist`（本 skill 默认 `disable-model-invocation`）。  
+须已有（或当场最小建）`$PROJECTS_ROOT/<project_slug>/PROJECT.md`。
 
 ## 产出
 
 ```
-selection/<slug>/SOC_SHORTLIST.md
+$PROJECTS_ROOT/<project_slug>/selection/SOC_SHORTLIST.md
 ```
 
 （Brief 通常同目录：`SELECTION_BRIEF.md`。须含**结论先行**的推荐表 + **厂商扫描表**方可 `complete`。）

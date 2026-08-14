@@ -26,12 +26,14 @@ ADR：[docs/adr/0001-retrieval-decoupled-from-family.md](../docs/adr/0001-retrie
 
 ## Before you start
 
-1. Read [CONTEXT.md](../CONTEXT.md)
-2. Read [shared/brief-template.md](../shared/brief-template.md)、[shared/application-domains.md](../shared/application-domains.md)、[shared/silicon-classes.md](../shared/silicon-classes.md)
-3. Check workspace `selection/<slug>/sources/` and context `brief_sources`（若有）
-4. 若 context 已带 `application_domains` / `primary_silicon_class` 等门户预填：作为推荐项，仍须产品确认
-5. Ask Dimension Turns in batches (1–5)；每题给 **recommended answer** 与 **recommended constraint grade**
-6. Do not start Phase 2 search here
+1. **项目闸门**：运行 `project-dossier/scripts/ensure-projects-root.sh`；确认 `project_slug`；无 `$PROJECTS_ROOT/<project_slug>/PROJECT.md` 则最小建档或引导 `/project-dossier`。只写入 `$PROJECTS_ROOT/<project_slug>/selection/`；根级旧 `selection/` 只提示。
+2. Read [CONTEXT.md](../CONTEXT.md)
+3. Read [shared/brief-template.md](../shared/brief-template.md)、[shared/application-domains.md](../shared/application-domains.md)、[shared/silicon-classes.md](../shared/silicon-classes.md)
+4. Check workspace `$PROJECTS_ROOT/<project_slug>/selection/sources/` and context `brief_sources`（若有）
+5. 若 context 已带 `application_domains` / `primary_silicon_class` 等门户预填：作为推荐项，仍须产品确认
+6. Ask Dimension Turns in batches (1–5)；每题给 **recommended answer** 与 **recommended constraint grade**
+7. Do not start Phase 2 search here
+8. Brief Ready 后回写 `PROJECT.md` §4 selection 一行
 
 ## Workflow
 
@@ -104,7 +106,7 @@ Phase 1 Progress:
 
 ### Step 5 — Export & Brief Ready
 
-写入 `selection/<product-slug>/SELECTION_BRIEF.md`（结构见模板）。
+写入 `$PROJECTS_ROOT/<project_slug>/selection/SELECTION_BRIEF.md`（结构见模板）。
 
 元信息必须含：`application_domains`、`primary_silicon_class`、`adjacent_silicon_classes`、`needs_seed_extension`。
 

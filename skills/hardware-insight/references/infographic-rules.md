@@ -15,7 +15,7 @@
 ## 目录与命名
 
 ```
-research/<产品简称>/output/infographics/
+$PROJECTS_ROOT/<project_slug>/research/output/infographics/
 ├── _style-lock.md
 ├── _manifest.md
 ├── competitors/

@@ -3,7 +3,7 @@
 细则以 [SKILL.md](./SKILL.md) 为准。本文件仅作步骤目录。
 
 **闸门**：Step 0 / 1 / 2 / 8 等人确认；其余自主推进。  
-**产出根**：`research/<产品简称>/`
+**产出根**：`$PROJECTS_ROOT/<project_slug>/research/`
 
 | Step | 名称 | 主要产出 |
 |------|------|----------|

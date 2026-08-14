@@ -79,7 +79,7 @@ Phase 1 对某一维度的单次用户回合：在同一回复中同时给出 Di
 _Avoid_: 两步等级确认, 取值与等级分问
 
 **Brief Source**:
-选型线上供 Phase 1 使用的外部输入文件，落在 Case Workspace（如 `selection/<slug>/sources/`）。是 Selection Brief 的输入溯源，不是 Artifact；Portal 负责上传与落盘，**不**在门户侧做维度映射。可在「开始 Brief」前上传（0～N），也可在 Brief Ready 前追加。追加不得静默改写**已确认**的 Dimension Answer / grade；若新源与已确认维冲突，须显式闸门询问是否重开该维的 Dimension Turn。v1 **承诺**可抽取：`.txt` / `.md` / `.csv` / `.xlsx`/`.xls` / 含文本层的 `.pdf` / `.docx`。图片与扫描件 PDF 为**尽力**（失败写入 Source Residue「未能抽取」，不阻塞 Phase 1）。
+选型线上供 Phase 1 使用的外部输入文件，落在 Case Workspace（如 `$PROJECTS_ROOT/<project_slug>/selection/sources/`）。是 Selection Brief 的输入溯源，不是 Artifact；Portal 负责上传与落盘，**不**在门户侧做维度映射。可在「开始 Brief」前上传（0～N），也可在 Brief Ready 前追加。追加不得静默改写**已确认**的 Dimension Answer / grade；若新源与已确认维冲突，须显式闸门询问是否重开该维的 Dimension Turn。v1 **承诺**可抽取：`.txt` / `.md` / `.csv` / `.xlsx`/`.xls` / 含文本层的 `.pdf` / `.docx`。图片与扫描件 PDF 为**尽力**（失败写入 Source Residue「未能抽取」，不阻塞 Phase 1）。
 _Avoid_: 附件（通用协作）, 第三种选型交付物, Portal 产出正式约束, v1 对图片/扫描件与文本格式同等成功承诺, 新源静默覆盖已确认维
 
 **Source Residue（未映射摘录）**:

@@ -15,9 +15,16 @@ disable-model-invocation: true
 
 **目的：** 结构化拆解技术组件，**识别关键技术以针对性投入**，从而提高产品竞争力。树不是完整 BOM/工程清单；节点取舍以「是否值得为竞争力而掌控或深投」为准。
 
-本 skill 属于 Technical Planning Skill Package（包公约见仓库根 CONTEXT.md）。运行时产出仅写入 `trees/`。
+本 skill 属于 Technical Planning Skill Package（包公约见仓库根 CONTEXT.md）。运行时写入 `$PROJECTS_ROOT/<project_slug>/trees/`。
 
 术语权威：[CONTEXT.md](CONTEXT.md)。运行时速查与图例：[reference.md](reference.md)。层定义备忘：[refs/技术树四层.md](refs/技术树四层.md)。本地若有 `examples/` 可作对照（默认不入库）。冲突时以本 skill 的 `CONTEXT.md` 为准，并在会话中澄清。
+
+## 项目闸门
+
+1. 先解析 Projects Root：运行 `project-dossier/scripts/ensure-projects-root.sh`，导出 `PROJECTS_PATHS` / `PROJECTS_PATH`。
+2. 确认 `project_slug`；无 `$PROJECTS_ROOT/<project_slug>/PROJECT.md` 则最小建档或引导 `/project-dossier`。
+3. 只写入 `$PROJECTS_ROOT/<project_slug>/trees/`；发现根级旧 `trees/` 只提示迁移，不双写。
+4. 里程碑落盘后回写 `PROJECT.md` §4 产物索引中 trees 一行。
 
 ## 硬规则
 
@@ -35,8 +42,8 @@ disable-model-invocation: true
 
 ### 0. 启动
 
-- 确认目标**产品或品类**名称；收集用户已有材料（文档、能力约束、本 skill `refs/`、本地可选 `examples/` 等）。
-- 确定 slug（默认英文或拼音）与输出目录：消费方工作区 `trees/<slug>/`（与本地 `examples/` 区分）。
+- 通过**项目闸门**；确认目标**产品或品类**名称（通常与 project 显示名一致）；收集用户已有材料（文档、能力约束、本 skill `refs/`、本地可选 `examples/` 等）。
+- 输出目录：`$PROJECTS_ROOT/<project_slug>/trees/`（与本地 `examples/` 区分）。
 - 若目录已有 `tech-tree.md`，先读入并询问：继续生长 / 修订 / 新建。
 - 结构图依赖：首次需要 drawio MCP 预览/导出前，运行  
   `bash <本包>/scripts/ensure-optional-deps.sh --only drawio`  
@@ -45,7 +52,7 @@ disable-model-invocation: true
 ### 1. 叶清单（卡诺）
 
 - 推荐完整清单，按 **必备 / 期望 / 魅力** 分组；说明分类理由（可简短）。
-- 用户确认或改写后，**立即**写入 `trees/<slug>/tech-tree.md` 首版（此时可无枝/干/根）。
+- 用户确认或改写后，**立即**写入 `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.md` 首版（此时可无枝/干/根）。
 - 请用户选出本会话要向下生长的 **一条或多条** 叶；未选中的只留在清单中。用户要求「完备/全覆盖」时，选定 = 清单全部。
 
 ### 2. 按叶向下生长
@@ -79,11 +86,11 @@ disable-model-invocation: true
 
 产物路径：
 
-- `trees/<slug>/tech-tree.md`
-- `trees/<slug>/tech-tree.drawio`
-- `trees/<slug>/tech-tree.png`（由 drawio 自动导出）
-- `trees/<slug>/tech-tree.jpg`（与 png 同内容；可由 png 转出或 MCP/工具直接导出）
-- 可选 `trees/<slug>/notes.md`（假设、待决、检索备忘）
+- `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.md`
+- `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio`
+- `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.png`（由 drawio 自动导出）
+- `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.jpg`（与 png 同内容；可由 png 转出或 MCP/工具直接导出）
+- 可选 `$PROJECTS_ROOT/<project_slug>/trees/notes.md`（假设、待决、检索备忘）
 
 ### 4. 结构图（drawio）— 必须遵守
 
@@ -122,9 +129,9 @@ disable-model-invocation: true
 
 ```bash
 # 已 symlink 到 .cursor/skills/grow-a-tech-tree/ 时：
-python3 .cursor/skills/grow-a-tech-tree/scripts/sync_status_colors.py trees/<slug>/tech-tree.drawio
+python3 .cursor/skills/grow-a-tech-tree/scripts/sync_status_colors.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio
 # 或以本仓为工作区时：
-python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py trees/<slug>/tech-tree.drawio
+python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio
 ```
 
 脚本在本 skill 的 `scripts/` 下。Agent 在生成或修订结构图后也应运行，保证色与状态一致。
@@ -142,7 +149,7 @@ python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py trees/<slug>/tech-
 
 **自动导出 PNG + JPG（硬约束）：** 结构图落盘并完成状态色同步后，必须再导出预览图：
 
-- 路径：`trees/<slug>/tech-tree.png` **与** `trees/<slug>/tech-tree.jpg`
+- 路径：`$PROJECTS_ROOT/<project_slug>/trees/tech-tree.png` **与** `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.jpg`
 - 优先用 user-drawio MCP：`load_diagram` → `export_diagram`（`format=png`）
 - JPG：若 MCP 不直接支持 jpg，用 ImageMagick 等从 png 转出，例如 `convert tech-tree.png -quality 92 tech-tree.jpg`
 - 时机：每次写入/大改 drawio 后；定稿时 png/jpg 须与最终 drawio 一致

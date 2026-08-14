@@ -179,28 +179,28 @@ endArrow=block;curved=1;edgeStyle=none;strokeColor=#666666
 draw.io 不会根据文字自动改色。生成图、或用户手动改了 `[状态：…]` 之后，运行：
 
 ```bash
-python3 .cursor/skills/grow-a-tech-tree/scripts/sync_status_colors.py trees/<slug>/tech-tree.drawio
+python3 .cursor/skills/grow-a-tech-tree/scripts/sync_status_colors.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio
 # 或以本仓为工作区：
-python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py trees/<slug>/tech-tree.drawio
+python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio
 ```
 
 脚本读取带 `[状态：…]` 的枝/干/根节点，按上表重写 fill/stroke/fontColor。状态文案必须是五态之一，否则脚本告警跳过。叶节点无状态行，脚本应跳过它们。
 
 ### MCP
 
-若存在 drawio MCP（`user-drawio` / `drawio`）：用其创建/编辑/预览，并保证仓库内 `trees/<slug>/tech-tree.drawio` 与会话一致。若未配置，先跑包根 `scripts/ensure-optional-deps.sh --only drawio`。无 MCP 时仍可用本 skill 脚本生成 XML：
+若存在 drawio MCP（`user-drawio` / `drawio`）：用其创建/编辑/预览，并保证仓库内 `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio` 与会话一致。若未配置，先跑包根 `scripts/ensure-optional-deps.sh --only drawio`。无 MCP 时仍可用本 skill 脚本生成 XML：
 
 也可从 `tech-tree.md` 按本文件布局约定生成结构图：
 
 ```bash
-python3 .cursor/skills/grow-a-tech-tree/scripts/gen_tech_tree_drawio.py trees/<slug>/tech-tree.md
-python3 .cursor/skills/grow-a-tech-tree/scripts/sync_status_colors.py trees/<slug>/tech-tree.drawio
+python3 .cursor/skills/grow-a-tech-tree/scripts/gen_tech_tree_drawio.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.md
+python3 .cursor/skills/grow-a-tech-tree/scripts/sync_status_colors.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio
 ```
 **自动导出 PNG + JPG（完成后必做）：**
 
-1. 状态色同步完成后，`load_diagram` 加载 `trees/<slug>/tech-tree.drawio`
-2. `export_diagram` 导出到 `trees/<slug>/tech-tree.png`（`format=png`）
-3. 再得到 `trees/<slug>/tech-tree.jpg`（MCP 若无 jpg：`convert trees/<slug>/tech-tree.png -background white -flatten -quality 92 trees/<slug>/tech-tree.jpg`）
+1. 状态色同步完成后，`load_diagram` 加载 `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio`
+2. `export_diagram` 导出到 `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.png`（`format=png`）
+3. 再得到 `$PROJECTS_ROOT/<project_slug>/trees/tech-tree.jpg`（MCP 若无 jpg：`convert $PROJECTS_ROOT/<project_slug>/trees/tech-tree.png -background white -flatten -quality 92 $PROJECTS_ROOT/<project_slug>/trees/tech-tree.jpg`）
 4. 定稿与每次大改结构图后都要刷新 png/jpg，使其与 drawio 一致
 
 无 MCP 时：可用 draw.io 桌面/CLI 等价导出，但仍须落盘同名 `tech-tree.png` 与 `tech-tree.jpg`。svg 可选，png+jpg 为默认必出物。

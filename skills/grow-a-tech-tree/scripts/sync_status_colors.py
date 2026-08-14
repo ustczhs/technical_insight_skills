@@ -7,7 +7,7 @@ Canonical location (grow-a-tech-tree skill):
 
 Usage:
   python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py \\
-    trees/<slug>/tech-tree.drawio
+    projects/<project_slug>/trees/tech-tree.drawio
 """
 
 from __future__ import annotations

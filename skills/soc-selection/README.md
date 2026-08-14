@@ -25,10 +25,12 @@
 ## 运行时产出
 
 ```
-selection/<slug>/sources/             # Brief Source（Phase 1 输入，可选）
-selection/<slug>/SELECTION_BRIEF.md
-selection/<slug>/SOC_SHORTLIST.md
+$PROJECTS_ROOT/<project_slug>/selection/sources/             # Brief Source（Phase 1 输入，可选）
+$PROJECTS_ROOT/<project_slug>/selection/SELECTION_BRIEF.md
+$PROJECTS_ROOT/<project_slug>/selection/SOC_SHORTLIST.md
 ```
+
+须已有（或当场最小建）`$PROJECTS_ROOT/<project_slug>/PROJECT.md`。根级旧 `selection/` 不再作为写入目标。
 
 ## 簇内衔接
 

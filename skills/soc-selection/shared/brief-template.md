@@ -1,6 +1,6 @@
 # Selection Brief Template
 
-建议路径：`selection/<product-slug>/SELECTION_BRIEF.md`  
+建议路径：`$PROJECTS_ROOT/<project_slug>/selection/SELECTION_BRIEF.md`  
 复制下方全文作为起点。**纯 Markdown**：文首元信息表 + 维度表；不要 YAML。
 
 # Selection Brief: \<产品名\>
@@ -11,6 +11,7 @@
 |------|-----|
 | schema_version | 1 |
 | brief_status | draft |
+| project_slug | |
 | product_name | |
 | product_slug | |
 | product_family | companion_robot / wearable_ai / out_of_family |

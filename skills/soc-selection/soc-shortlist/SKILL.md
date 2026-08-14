@@ -24,10 +24,12 @@ disable-model-invocation: true
 
 ## Before you start
 
-1. Read 本簇 [CONTEXT.md](../CONTEXT.md) and [evidence-rules.md](../shared/evidence-rules.md)
-2. Load the Brief（`selection/<slug>/SELECTION_BRIEF.md`）
-3. Read shortlist-template、vendor-seeds、silicon-classes、application-domains；skim phase2-spec-probes
-4. **Refuse** full Phase 2 if `brief_status` ≠ `brief_ready`，或缺少 `primary_silicon_class` / 未确认的 `application_domains` — 列缺口回 Phase 1
+1. **项目闸门**：运行 `project-dossier/scripts/ensure-projects-root.sh`；确认 `project_slug`；无 `PROJECT.md` 则最小建档或引导 `/project-dossier`。只写入 `$PROJECTS_ROOT/<project_slug>/selection/`。
+2. Read 本簇 [CONTEXT.md](../CONTEXT.md) and [evidence-rules.md](../shared/evidence-rules.md)
+3. Load the Brief（`$PROJECTS_ROOT/<project_slug>/selection/SELECTION_BRIEF.md`）
+4. Read shortlist-template、vendor-seeds、silicon-classes、application-domains；skim phase2-spec-probes
+5. **Refuse** full Phase 2 if `brief_status` ≠ `brief_ready`，或缺少 `primary_silicon_class` / 未确认的 `application_domains` — 列缺口回 Phase 1
+6. Shortlist 定稿后回写 `PROJECT.md` §4 selection 一行
 
 ## Workflow
 
@@ -135,7 +137,7 @@ Phase 2 Progress:
 
 ### Step 6 — Export
 
-写 `selection/<product-slug>/SOC_SHORTLIST.md`（纯 Markdown，结构见 [shortlist-template.md](../shared/shortlist-template.md)）。数量不限、不强制唯一赢家。
+写 `$PROJECTS_ROOT/<project_slug>/selection/SOC_SHORTLIST.md`（纯 Markdown，结构见 [shortlist-template.md](../shared/shortlist-template.md)）。数量不限、不强制唯一赢家。
 
 **文档质量（强制）——结论先行、论据随后：**
 

@@ -9,11 +9,12 @@
 - 要从产品或品类「长技术树 / 找根技术 / 技术树拆解」
 - 需要卡诺叶清单，再向下拆到可掌控的枝/干/根
 - 显式调用：`/grow-a-tech-tree`（本 skill 默认 `disable-model-invocation`）
+- 须已有（或当场最小建）`$PROJECTS_ROOT/<project_slug>/PROJECT.md`
 
 ## 产出
 
 ```
-trees/<slug>/
+$PROJECTS_ROOT/<project_slug>/trees/
 ├── tech-tree.md
 ├── tech-tree.drawio
 ├── tech-tree.png
@@ -21,7 +22,9 @@ trees/<slug>/
 └── notes.md          # 可选
 ```
 
-本地可自建 `examples/`（md + drawio）对照格式，与运行时 `trees/` 区分；该目录已 gitignore，**勿提交**含具体产品的技术树。
+本地可自建 `examples/`（md + drawio）对照格式，与运行时 `$PROJECTS_ROOT/<project_slug>/trees/` 区分；该目录已 gitignore，**勿提交**含具体产品的技术树。
+
+须已有（或当场最小建）`$PROJECTS_ROOT/<project_slug>/PROJECT.md`。
 
 ## 目录结构
 
@@ -50,8 +53,8 @@ skills/grow-a-tech-tree/
 ## 脚本
 
 ```bash
-python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py trees/<slug>/tech-tree.drawio
-python3 skills/grow-a-tech-tree/scripts/gen_tech_tree_drawio.py trees/<slug>/tech-tree.md
+python3 skills/grow-a-tech-tree/scripts/sync_status_colors.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.drawio
+python3 skills/grow-a-tech-tree/scripts/gen_tech_tree_drawio.py $PROJECTS_ROOT/<project_slug>/trees/tech-tree.md
 ```
 
 （已 symlink 时把前缀换成 `.cursor/skills/grow-a-tech-tree/`。）

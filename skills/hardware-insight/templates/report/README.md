@@ -1,6 +1,6 @@
 # 报告模板使用说明
 
-本目录为 hardware-insight Step 8 的**最终报告骨架模板**。撰写 `research/<产品简称>/output/报告-<取向>.md` 时，须复制对应模板章节结构并填充内容。
+本目录为 hardware-insight Step 8 的**最终报告骨架模板**。撰写 `$PROJECTS_ROOT/<project_slug>/research/output/报告-<取向>.md` 时，须复制对应模板章节结构并填充内容。
 
 ## 模板清单
 
@@ -12,7 +12,7 @@
 
 ## 立场与读者
 
-**立场不由模板决定**，撰写前读取 `research/<产品简称>/调研基调.md`：
+**立场不由模板决定**，撰写前读取 `$PROJECTS_ROOT/<project_slug>/research/调研基调.md`：
 
 - `分析师立场`：用户自填（无默认组织）；值为「中立第三方」时启用中立模式
 - `读者`：管理层 / 产品 / 研发 / 投资人
@@ -48,14 +48,14 @@ flowchart LR
 撰写报告前**必须阅读**（不得仅从 `决策摘要.md` 派生）：
 
 ```
-research/<产品简称>/调研基调.md
-research/<产品简称>/竞品列表.md
-research/<产品简称>/调研/T0-*.md（全部）
-research/<产品简称>/调研/T1-*.md（全部）
-research/<产品简称>/竞品分析.md
-research/<产品简称>/技术分析.md
-research/<产品简称>/商业机会.md
-research/<产品简称>/决策摘要.md
+$PROJECTS_ROOT/<project_slug>/research/调研基调.md
+$PROJECTS_ROOT/<project_slug>/research/竞品列表.md
+$PROJECTS_ROOT/<project_slug>/research/调研/T0-*.md（全部）
+$PROJECTS_ROOT/<project_slug>/research/调研/T1-*.md（全部）
+$PROJECTS_ROOT/<project_slug>/research/竞品分析.md
+$PROJECTS_ROOT/<project_slug>/research/技术分析.md
+$PROJECTS_ROOT/<project_slug>/research/商业机会.md
+$PROJECTS_ROOT/<project_slug>/research/决策摘要.md
 ```
 
 ### 章节 ↔ 源文件速查

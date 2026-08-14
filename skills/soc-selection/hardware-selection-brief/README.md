@@ -10,13 +10,14 @@
 - Companion Robot / Wearable AI 等 Product Family 的维度收敛
 - 需要产出 Brief Ready，交给同簇 Phase 2
 
-显式调用：`/hardware-selection-brief`（本 skill 默认 `disable-model-invocation`）。
+显式调用：`/hardware-selection-brief`（本 skill 默认 `disable-model-invocation`）。  
+须已有（或当场最小建）`$PROJECTS_ROOT/<project_slug>/PROJECT.md`。
 
 ## 产出
 
 ```
-selection/<slug>/sources/           # Brief Source（可选输入）
-selection/<slug>/SELECTION_BRIEF.md
+$PROJECTS_ROOT/<project_slug>/selection/sources/           # Brief Source（可选输入）
+$PROJECTS_ROOT/<project_slug>/selection/SELECTION_BRIEF.md
 ```
 
 外部材料经抽取成为 Source-Derived Draft，须 Dimension Turn 确认后写入 Brief；文首 `brief_status` = `brief_ready` 后方可进入 Phase 2。

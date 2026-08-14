@@ -99,14 +99,14 @@
 撰写报告前**必须阅读**（不得仅从 `决策摘要.md` 派生）：
 
 ```
-research/<产品简称>/调研基调.md
-research/<产品简称>/竞品列表.md
-research/<产品简称>/调研/T0-*.md（全部）
-research/<产品简称>/调研/T1-*.md（全部）
-research/<产品简称>/竞品分析.md
-research/<产品简称>/技术分析.md
-research/<产品简称>/商业机会.md
-research/<产品简称>/决策摘要.md
+$PROJECTS_ROOT/<project_slug>/research/调研基调.md
+$PROJECTS_ROOT/<project_slug>/research/竞品列表.md
+$PROJECTS_ROOT/<project_slug>/research/调研/T0-*.md（全部）
+$PROJECTS_ROOT/<project_slug>/research/调研/T1-*.md（全部）
+$PROJECTS_ROOT/<project_slug>/research/竞品分析.md
+$PROJECTS_ROOT/<project_slug>/research/技术分析.md
+$PROJECTS_ROOT/<project_slug>/research/商业机会.md
+$PROJECTS_ROOT/<project_slug>/research/决策摘要.md
 ```
 
 ---

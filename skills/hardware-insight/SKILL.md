@@ -11,12 +11,19 @@ description: >-
 
 # 智能硬件结构化调研
 
-按 [basic_flow.md](basic_flow.md) 执行 Step 0–8。每次调研在 `research/<产品简称>/` 下产出文件。
+按 [basic_flow.md](basic_flow.md) 执行 Step 0–8。每次调研在 `$PROJECTS_ROOT/<project_slug>/research/` 下产出文件。
+
+## 项目闸门
+
+1. 先解析 Projects Root：运行 `project-dossier/scripts/ensure-projects-root.sh`，导出 `PROJECTS_PATHS` / `PROJECTS_PATH`。
+2. 确认 `project_slug`；无 `PROJECT.md` 则最小建档或引导 `/project-dossier`。
+3. 只写入 `$PROJECTS_ROOT/<project_slug>/research/`；根级旧 `research/` 只提示迁移。
+4. 重要里程碑后回写 `PROJECT.md` §4 中 research 一行。
 
 ## 启动
 
-1. 创建或读取目录 `research/<产品简称>/`。
-2. 读取 `research/<产品简称>/进度.md`（若存在）确定当前步骤；否则从 Step 0 开始。
+1. 通过项目闸门；创建或读取目录 `$PROJECTS_ROOT/<project_slug>/research/`。
+2. 读取 `$PROJECTS_ROOT/<project_slug>/research/进度.md`（若存在）确定当前步骤；否则从 Step 0 开始。
 3. 若 `调研基调.md` 存在且 `Step 0 状态：已确认` → **跳过 Step 0 问询**，从当前步骤续跑。
 4. 否则执行 Step 0 意图发现（**必须**读取 [references/intent-discovery.md](references/intent-discovery.md)）。
 5. 每步完成后更新 `进度.md`，再进入下一步。
@@ -55,11 +62,11 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 
 ## Step 0：定调（交互闸门）
 
-执行前读取 [references/intent-discovery.md](references/intent-discovery.md)。产出双文件于 `research/<产品简称>/`。
+执行前读取 [references/intent-discovery.md](references/intent-discovery.md)。产出双文件于 `$PROJECTS_ROOT/<project_slug>/research/`。
 
 | 子步 | 动作 | 产出 |
 |------|------|------|
-| **0a 语境扫描** | 读已有 `research/`、WebSearch 公开事实（不问用户） | `调研意图.md` 草稿 |
+| **0a 语境扫描** | 读已有 `$PROJECTS_ROOT/*/research/`（及根级旧 `research/` 仅作提示）、WebSearch 公开事实（不问用户） | `调研意图.md` 草稿 |
 | **0b 澄清/压测** | agent 判断清晰度：模糊 → full grill（≤8 轮开放题）；清晰 → 简流程（1–3 轮）；含假设压测 | 交错更新两文件草稿 |
 | **0c 结构化采集** | `AskQuestion` 收集基本参数（与开放题**分条消息**） | 更新 `调研基调.md` |
 | **0d 定稿闸门** | 展示摘要；用户确认后设 `Step 0 状态：已确认` | 勾选进度检查点 |
@@ -86,7 +93,7 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 ## Step 1：制定调研模板（交互闸门）
 
 - 输入：目标产品信息、`调研基调.md`
-- 输出：`research/<产品简称>/调研模板.md`
+- 输出：`$PROJECTS_ROOT/<project_slug>/research/调研模板.md`
 - 按基调裁剪维度；启用硬件扩展包时追加：BOM/成本、供应链与量产、认证合规、专利/IP、可靠性售后
 - 审核：维度 MECE、匹配调研目的
 - **轻量 grill**（≤3 轮，见 [intent-discovery.md](references/intent-discovery.md) §E）：展示模板时给出 **推荐裁剪 + 1–2 替代方案**；单问确认维度取舍；不重复 Step 0 已确认项
@@ -95,7 +102,7 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 ## Step 2：调研竞品列表（交互闸门）
 
 - 输入：目标产品信息、`调研基调.md`
-- 输出：`research/<产品简称>/竞品列表.md`（T0/T1/T2、分层依据、直接/间接竞品）
+- 输出：`$PROJECTS_ROOT/<project_slug>/research/竞品列表.md`（T0/T1/T2、分层依据、直接/间接竞品）
 - 审核：覆盖性与分层合理性
 - **轻量 grill**（≤3 轮，见 [intent-discovery.md](references/intent-discovery.md) §F）：展示列表 + **T0 覆盖/错层挑战式单问**；不重复 Step 0 已确认项
 - **闸门**：用户确认列表后进入 Step 3
@@ -103,7 +110,7 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 ## Step 3：填充竞品调研
 
 - 输入：`竞品列表.md`、`调研模板.md`
-- 输出：`research/<产品简称>/调研/` 下每竞品一文件，如 `调研/T0-品牌-型号.md`
+- 输出：`$PROJECTS_ROOT/<project_slug>/research/调研/` 下每竞品一文件，如 `调研/T0-品牌-型号.md`
 - **结构**：每文件必须复制 `调研模板.md` 全部章节标题（13 节 + 扩展包节）
 - **深度分层**（章节相同，深度不同）：
   - T0：全字段尽力填写，多源交叉
@@ -118,21 +125,21 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 ## Step 4：竞品分析
 
 - 输入：结构化调研文件、`调研基调.md`
-- 输出：`research/<产品简称>/竞品分析.md`（定位、价格、功能、体验、渠道、销量/口碑）
+- 输出：`$PROJECTS_ROOT/<project_slug>/research/竞品分析.md`（定位、价格、功能、体验、渠道、销量/口碑）
 - 审核：对比维度匹配基调；结论有调研数据支撑；文首附 `调研信息截止：YYYY-MM-DD`；**每个 T0 ≥5 条可引用数据点；含「对我方主体影响」列**。详见 [references/report-synthesis.md](references/report-synthesis.md)
 - **边界**：不写实现原理与技术路线（留给 Step 5）
 
 ## Step 5：技术分析
 
 - 输入：结构化调研文件
-- 输出：`research/<产品简称>/技术分析.md`（架构、核心器件/算法、技术路线、成熟度与优劣势；可检索开源/学术）
+- 输出：`$PROJECTS_ROOT/<project_slug>/research/技术分析.md`（架构、核心器件/算法、技术路线、成熟度与优劣势；可检索开源/学术）
 - 审核：技术结论属实；路线分析有独立来源交叉验证；文首附 `调研信息截止：YYYY-MM-DD`；**含架构图 + Build/Buy/Partner 三栏**。详见 [references/report-synthesis.md](references/report-synthesis.md)
 - **边界**：不写市场表现对比（已在 Step 4）
 
 ## Step 6：商业机会分析
 
 - 输入：调研文件、`竞品分析.md`、`技术分析.md`
-- 输出：`research/<产品简称>/商业机会.md`（场景/用户、市场规模与趋势、机会与威胁、窗口期）
+- 输出：`$PROJECTS_ROOT/<project_slug>/research/商业机会.md`（场景/用户、市场规模与趋势、机会与威胁、窗口期）
 - 审核：市场判断准确；与 Step 4/5 交叉引用；文首附 `调研信息截止：YYYY-MM-DD`；**含量化字段与竞争响应时间表**。详见 [references/report-synthesis.md](references/report-synthesis.md)
 
 ## Step 7：决策综合
@@ -140,8 +147,8 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 - 输入：`竞品分析.md`、`技术分析.md`、`商业机会.md`、`调研基调.md`
 - **执行顺序**：先 `决策摘要.md`，再 `swot分析.md`
 - 输出：
-  - `research/<产品简称>/决策摘要.md`（核心结论、方案选项、主要风险、建议方向）
-  - `research/<产品简称>/swot分析.md`（S/W/O/T 四象限 + SO/ST/WO/WT 2×2 策略矩阵；综合 Step 4–6，主语为我方主体）
+  - `$PROJECTS_ROOT/<project_slug>/research/决策摘要.md`（核心结论、方案选项、主要风险、建议方向）
+  - `$PROJECTS_ROOT/<project_slug>/research/swot分析.md`（S/W/O/T 四象限 + SO/ST/WO/WT 2×2 策略矩阵；综合 Step 4–6，主语为我方主体）
 - 审核：结论有调研支撑；回应 Step 0 调研目的；**建议方向主语为我方主体**；含 12/24 月里程碑、资源粗估、明确不做边界；SWOT 四象限与 2×2 矩阵达标。详见 [references/report-synthesis.md](references/report-synthesis.md)
 - **边界**：SWOT 正文**不得**并入 `决策摘要.md`；Step 8 **不强制**读取 `swot分析.md`
 
@@ -189,7 +196,7 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 
 ## 进度文件格式
 
-`research/<产品简称>/进度.md`：
+`$PROJECTS_ROOT/<project_slug>/research/进度.md`：
 
 ```markdown
 # 调研进度：<产品名>
