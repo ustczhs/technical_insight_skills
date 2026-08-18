@@ -3,7 +3,8 @@ name: requirements-review
 description: >-
   Requirements skill in the Technical Planning Skill Package: grill a fuzzy
   Requirement Seed against a Project Corpus (id card, feature lists, etc.) into
-  a Clarified Requirement, then a Value Verdict (Do / Defer / Don't). Writes under
+  a Clarified Requirement (including Delivery Sketch), then a Value Verdict
+  (Do / Defer / Don't) that cites the sketch. Writes under
   $PROJECTS_ROOT/<project_slug>/requirements/<req_slug>/. Use when the user invokes
   requirements-review, /requirements-review, or asks for 需求澄清 / 需求评审 /
   模糊需求对齐 / 需求价值评估 — not SoC selection, hardware research, tech-tree,
@@ -13,7 +14,7 @@ disable-model-invocation: true
 
 # requirements-review
 
-通过 grill，把 **Requirement Seed**（模糊需求）相对 **Project Corpus** 澄清为 **Clarified Requirement**，再给出 **Value Verdict**（Do / Defer / Don't）。
+通过 grill，把 **Requirement Seed**（模糊需求）相对 **Project Corpus** 澄清为 **Clarified Requirement**（含 **Delivery Sketch**），再给出 **Value Verdict**（Do / Defer / Don't，且必须引用交付草图）。
 
 本 skill 属于 Technical Planning Skill Package（包公约见仓库根 CONTEXT.md）。运行时写入 `$PROJECTS_ROOT/<project_slug>/requirements/<req_slug>/`。与调研 / 选型 / 技术树**无硬衔接**。
 
@@ -23,16 +24,17 @@ disable-model-invocation: true
 
 1. **项目闸门**：先确认 `project_slug`；无 `PROJECT.md` 则最小建档或引导 `/project-dossier`，再继续。
 2. **双产物顺序闸门**：先澄清，再价值。未 `clarification_status = ready` 不得定稿正式 Value Verdict。
-3. **一次只推进一个决策**（默认）；低耦合维可一批 ≤3。下列必须**单独成题**：Corpus 纳入确认、Corpus Relation、最终 Do/Defer/Don't。
+3. **一次只推进一个决策**（默认）；低耦合维可一批 ≤3。下列必须**单独成题**：Corpus 纳入确认、Corpus Relation、clarification ready 确认、最终 Do/Defer/Don't；若 Delivery Sketch 有「待定」且仍推 Do，须再单独成题显式接受。
 4. **每个决策必须带推荐答案**；禁止让用户对着空白枚举。
 5. **Grill 输出用选择题**：面向用户的决策题按 [shared/grill-output.md](shared/grill-output.md) 输出——实质选项 2–4 个并标注 `（推荐）`，**最后一项固定为「其他 / 自定义」**供用户改写；禁止只写「同意 / 或改写」而无选项列表。
 6. **推荐要高质量**：结合 Project Corpus（优先 `$PROJECTS_ROOT/<project_slug>/corpus/`）、本 skill `shared/`、以及**主动联网检索**。检索失败则降级为仅本地，不阻塞。
 7. **来源分型**：写入产物时区分 **Corpus（本地权威）** vs **Web（外部参考）**。Web 默认仅参考；升格进结论前须用户确认，并标注 URL。v1 **不设**域名白名单。
 8. **Conflicts / Already-covered 未解消 → 不得推荐 Do**。
 9. **薄 Corpus / Unknown**：可继续；`confidence` 倾向 low；默认更偏 Defer，除非用户显式接受无文档对齐风险。
-10. 能从仓库/上下文查到的事实自己查；**决策权在用户**。未达共同理解前，不宣称评审完成。
-11. 产物与追问以**中文**为主；术语可用 CONTEXT 中的英文标签。
-12. **索引回写**：完成后更新 `PROJECT.md` §3 需求索引对应行（及 `updated`）；勿改简介/Corpus 列表/status。
+10. **Delivery Sketch 闸门**：`tech_route` / `integration_surface` / `effort_band` / `duration_band` 均须用户确认（可为「待定」）后才可 ready；Verdict 必须引用草图；`cost_complexity` / `risk` / `timing` 与结论理由须点名引用。人力/工期偏高**不**设禁 Do 硬闸。Sketch 任一项待定 → `confidence` 不得 high；推 Do 须显式接受。
+11. 能从仓库/上下文查到的事实自己查；**决策权在用户**。未达共同理解前，不宣称评审完成。
+12. 产物与追问以**中文**为主；术语可用 CONTEXT 中的英文标签。
+13. **索引回写**：完成后更新 `PROJECT.md` §3 需求索引对应行（及 `updated`）；勿改简介/Corpus 列表/status。
 
 ## 项目闸门
 
@@ -59,21 +61,25 @@ disable-model-invocation: true
 
 ### 2. Clarification Dimensions
 
-- 按七维推进。每维：推荐答案 + Corpus/Web 依据 → **选择题**请用户确认（见 [shared/grill-output.md](shared/grill-output.md)）。
+- 按 **11 维**推进（含 Delivery Sketch 四顶维）。每维：推荐答案 + Corpus/Web 依据 → **选择题**请用户确认（见 [shared/grill-output.md](shared/grill-output.md)）。
+- `effort_band` / `duration_band` **仅用** clarification-dimensions 中的固定词表；`tech_route` / `integration_surface` 按 Corpus 生成选项，可含「待定」。
+- `constraints` **不**再承担工期主责（见 `duration_band`）。
 - 整条需求标注 **Corpus Relation**——**单独成题**（选择题）。
-- 增量写入 `…/CLARIFIED_REQUIREMENT.md`（模板：[shared/clarified-requirement-template.md](shared/clarified-requirement-template.md)）。
-- 达成一致后 `clarification_status = ready`（须用户确认；选择题）。
+- 增量写入 `…/CLARIFIED_REQUIREMENT.md`（模板：[shared/clarified-requirement-template.md](shared/clarified-requirement-template.md)），含 § Delivery Sketch。
+- 四维均已确认后，再请用户确认 `clarification_status = ready`（选择题）。
 
 ### 3. Value Verdict
 
 - **闸门**：仅当澄清 Ready。
-- 六维定性评估（可用一题确认「同意修订六维 / 调整某维 / 自定义」）→ 推荐 Do / Defer / Don't（**单独成题**，选择题）。
+- 先写入/展示对 Delivery Sketch 的引用，再做六维定性评估（可用一题确认「同意修订六维 / 调整某维 / 自定义」）。
+- `cost_complexity` / `risk` / `timing` 与结论理由须引用 Sketch。
+- 推荐 Do / Defer / Don't（**单独成题**）；Sketch 有待定且推 Do 时再**单独成题**显式接受。
 - 写入 `…/VALUE_VERDICT.md`；确认后 `verdict_status = final`。
 
 ### 4. 收尾
 
 - 回写 `PROJECT.md` 需求索引行。
-- 不自动调用其他簇；可口头建议。
+- 不自动调用其他簇；可口头建议按草图进入设计/技术树（无硬衔接）。
 
 ## 进度检查清单
 
@@ -81,11 +87,12 @@ disable-model-invocation: true
 Requirements Review Progress:
 - [ ] Step 0: project_slug 闸门 + Requirement Seed + req_slug
 - [ ] Step 1: Project Corpus 确认（可空=降级）
-- [ ] Step 2: Clarification Dimensions（7）
+- [ ] Step 2: Clarification Dimensions（11，含 Delivery Sketch）
 - [ ] Step 2b: Corpus Relation + 冲突解消
-- [ ] Step 2c: clarification_status = ready
-- [ ] Step 3: Value Dimensions（6）
-- [ ] Step 3b: Do / Defer / Don't 确认
+- [ ] Step 2c: Delivery Sketch 四维已确认（可为待定）
+- [ ] Step 2d: clarification_status = ready
+- [ ] Step 3: 引用 Delivery Sketch + Value Dimensions（6）
+- [ ] Step 3b: Do / Defer / Don't 确认（待定推 Do 须显式接受）
 - [ ] Step 3c: verdict_status = final
 - [ ] Step 4: PROJECT.md 需求索引回写
 ```
@@ -101,5 +108,6 @@ $PROJECTS_ROOT/<project_slug>/requirements/<req_slug>/
 ## 非目标
 
 - 不是完整 PRD / 设计文档 / 排期系统 / 项目档案 CRUD（那是 `project-dossier`）
+- 不是独立第三产物 `DELIVERY_SKETCH.md`
 - 不是 SoC 选型、智能硬件调研、技术树生长
 - 不建立与其他簇的硬交接闸门
