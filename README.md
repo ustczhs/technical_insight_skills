@@ -16,6 +16,7 @@
 |----|------|---------------------------|------|
 | Project Dossier | 项目建档与活档案 CRUD（单 skill） | `$PROJECTS_ROOT/<project_slug>/`（`PROJECT.md`、`corpus/`） | [skills/project-dossier/](./skills/project-dossier/) |
 | Hardware Insight | 智能硬件结构化调研（单 skill） | `…/research/` | [skills/hardware-insight/](./skills/hardware-insight/) |
+| Cross-Domain Opportunity | AI×硬件跨域碰撞：广覆盖火花 → 可证伪机会与交接 | `…/opportunities/` | [skills/cross-domain-opportunity-explorer/](./skills/cross-domain-opportunity-explorer/) |
 | SoC Selection | 主控选型（Brief → Shortlist，簇内衔接） | `…/selection/` | [skills/soc-selection/](./skills/soc-selection/) |
 | Tech Tree | 产品技术树生长（单 skill） | `…/trees/` | [skills/grow-a-tech-tree/](./skills/grow-a-tech-tree/) |
 | Requirements Review | 模糊需求澄清 + 价值评审（单 skill） | `…/requirements/<req_slug>/` | [skills/requirements-review/](./skills/requirements-review/) |
@@ -28,6 +29,7 @@
 |-------|------|------|
 | `project-dossier` | 项目档案建档 / CRUD / sync | [skills/project-dossier/](./skills/project-dossier/) |
 | `hardware-insight` | 智能硬件结构化调研 | [skills/hardware-insight/](./skills/hardware-insight/) |
+| `cross-domain-opportunity-explorer` | 跨域碰撞找 AI×硬件机会火花 | [skills/cross-domain-opportunity-explorer/](./skills/cross-domain-opportunity-explorer/) |
 | `hardware-selection-brief` | 选型 Phase 1：Selection Brief | [skills/soc-selection/hardware-selection-brief/](./skills/soc-selection/hardware-selection-brief/) |
 | `soc-shortlist` | 选型 Phase 2：SoC Shortlist（需 Brief Ready） | [skills/soc-selection/soc-shortlist/](./skills/soc-selection/soc-shortlist/) |
 | `grow-a-tech-tree` | 卡诺叶清单 → 叶/枝/干/根 + drawio | [skills/grow-a-tech-tree/](./skills/grow-a-tech-tree/) |
@@ -85,6 +87,15 @@ drawio MCP 写入 `~/.cursor/mcp.json` 后可能需重启 Cursor 才会出现。
 ```
 
 或 `/hardware-insight`。产出：`$PROJECTS_ROOT/<project_slug>/research/`。详见 [skills/hardware-insight/README.md](./skills/hardware-insight/README.md)。
+
+### 跨域机会探索（`cross-domain-opportunity-explorer`）
+
+```
+探索「<人群/兴趣/生活场景>」的 AI × 智能硬件机会火花
+```
+
+或 `/cross-domain-opportunity-explorer`。原则：覆盖尽量广、检索要新、挖掘要深、对人结论要直接。  
+产出：`$PROJECTS_ROOT/<project_slug>/opportunities/`（先看 `SESSION_BRIEF.md`）。详见 [skills/cross-domain-opportunity-explorer/README.md](./skills/cross-domain-opportunity-explorer/README.md)。
 
 ### 选型（簇内 Brief → Shortlist）
 

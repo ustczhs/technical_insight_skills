@@ -24,11 +24,11 @@ _Avoid_: 把簇 README 或 shared 目录当作可安装 skill
 _Avoid_: 把完整 Step 流程只写在 README, README 与 SKILL.md 双源维护同一套细则, 在叶子 README 里复述与其他簇的「无强制先后」
 
 **Project Workspace Root**:
-机器级项目档案父目录，即 **Projects Root**（`$PROJECTS_PATHS` / `$PROJECTS_PATH` / 配置文件 / 默认 `$HOME/projects`，由 `project-dossier` 解析、缺失则创建并固化）。单个项目路径为 `$PROJECTS_ROOT/<project_slug>/`，其下用分离子目录承载各簇产物（`corpus/`、`requirements/`、`research/`、`trees/`、`selection/`）与扉页 `PROJECT.md`。允许多簇共用该父目录，但禁止混写同一子树或无项目归属地乱写。
-_Avoid_: 以当前代码仓相对 `projects/` 为唯一写入根, 根级平铺 `research/` / `selection/` / `trees/` / `requirements/` 作为新写入目标（已废弃）, 多簇共用同一文件无分目录
+机器级项目档案父目录，即 **Projects Root**（`$PROJECTS_PATHS` / `$PROJECTS_PATH` / 配置文件 / 默认 `$HOME/projects`，由 `project-dossier` 解析、缺失则创建并固化）。单个项目路径为 `$PROJECTS_ROOT/<project_slug>/`，其下用分离子目录承载各簇产物（`corpus/`、`requirements/`、`research/`、`opportunities/`、`trees/`、`selection/`）与扉页 `PROJECT.md`。允许多簇共用该父目录，但禁止混写同一子树或无项目归属地乱写。
+_Avoid_: 以当前代码仓相对 `projects/` 为唯一写入根, 根级平铺 `research/` / `opportunities/` / `selection/` / `trees/` / `requirements/` 作为新写入目标（已废弃）, 多簇共用同一文件无分目录
 
 **Runtime Output Root**:
-某一分析簇在 Project Dossier 内的子目录约定。当前：`$PROJECTS_ROOT/<project_slug>/research/`（调研）、`…/selection/`（选型）、`…/trees/`（技术树）、`…/requirements/<req_slug>/`（需求评审）。`project-dossier` 维护档案本身（`PROJECT.md`、`corpus/`）并负责 Projects Root 固化。各簇下可选的 `examples/` 仅供本地对照，**不作为公开包内容**。
+某一分析簇在 Project Dossier 内的子目录约定。当前：`$PROJECTS_ROOT/<project_slug>/research/`（调研）、`…/opportunities/`（跨域机会探索）、`…/selection/`（选型）、`…/trees/`（技术树）、`…/requirements/<req_slug>/`（需求评审）。`project-dossier` 维护档案本身（`PROJECT.md`、`corpus/`）并负责 Projects Root 固化。各簇下可选的 `examples/` 仅供本地对照，**不作为公开包内容**。
 _Avoid_: 无 project_slug 的写入, 把示例目录当成运行时落盘位置, 将含具体产品结论的 examples 提交入库
 
 **Project Dossier Gate**:

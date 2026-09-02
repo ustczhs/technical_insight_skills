@@ -68,7 +68,7 @@ Projects Root：[shared/projects-root.md](shared/projects-root.md)。
 1. 完成 Step 0。  
 2. 推荐 `project_slug` 与显示名 → 用户确认。  
 3. 若 `$PROJECTS_ROOT/<project_slug>/` 已存在：改为 update / sync，勿覆盖。  
-4. 按模板写 `PROJECT.md`；创建 `corpus/`、`requirements/`、`research/`、`trees/`、`selection/sources/`。  
+4. 按模板写 `PROJECT.md`；创建 `corpus/`、`requirements/`、`research/`、`opportunities/`、`trees/`、`selection/sources/`。
 5. 可选：用户指定初始 Corpus 文件，复制或链接进 `corpus/` 并登记。
 
 ### 其他动作

@@ -41,6 +41,7 @@
 | 簇 | 状态 | 入口 |
 |----|------|------|
 | research | 无 / 进行中 / 有产物 | [./research/](./research/) |
+| opportunities | 无 / 进行中 / 有产物 | [./opportunities/](./opportunities/) |
 | trees | 无 / 进行中 / 有产物 | [./trees/](./trees/) |
 | selection | 无 / 进行中 / 有产物 | [./selection/](./selection/) |
 

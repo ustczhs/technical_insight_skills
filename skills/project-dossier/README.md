@@ -29,6 +29,7 @@ $PROJECTS_ROOT/<project_slug>/
 ├── corpus/
 ├── requirements/<req_slug>/
 ├── research/
+├── opportunities/
 ├── trees/
 └── selection/
 ```

@@ -13,6 +13,7 @@ $PROJECTS_ROOT/<project_slug>/
 │       ├── CLARIFIED_REQUIREMENT.md
 │       └── VALUE_VERDICT.md
 ├── research/                  # hardware-insight 产出（不再套一层产品简称）
+├── opportunities/             # cross-domain-opportunity-explorer 产出
 ├── trees/                     # grow-a-tech-tree 产出
 └── selection/                 # soc-selection 产出（含 sources/）
     └── sources/               # 可选 Brief Source
@@ -29,4 +30,4 @@ $PROJECTS_ROOT/<project_slug>/
 以下路径**不再作为新写入目标**（若存在，只提示用户迁移/指定归属，不自动搬家）：
 
 - 当前代码工作区下的相对 `projects/`
-- 仓库根级平铺：`research/`、`selection/`、`trees/`、`requirements/`
+- 仓库根级平铺：`research/`、`opportunities/`、`selection/`、`trees/`、`requirements/`

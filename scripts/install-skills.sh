@@ -20,6 +20,7 @@ Usage:
 Leaf names:
   project-dossier
   hardware-insight
+  cross-domain-opportunity-explorer
   hardware-selection-brief
   soc-shortlist
   grow-a-tech-tree
@@ -72,13 +73,14 @@ fi
 declare -A LEAF_PATHS=(
   [project-dossier]="project-dossier"
   [hardware-insight]="hardware-insight"
+  [cross-domain-opportunity-explorer]="cross-domain-opportunity-explorer"
   [hardware-selection-brief]="soc-selection/hardware-selection-brief"
   [soc-shortlist]="soc-selection/soc-shortlist"
   [grow-a-tech-tree]="grow-a-tech-tree"
   [requirements-review]="requirements-review"
 )
 
-ALL_LEAVES=(project-dossier hardware-insight hardware-selection-brief soc-shortlist grow-a-tech-tree requirements-review)
+ALL_LEAVES=(project-dossier hardware-insight cross-domain-opportunity-explorer hardware-selection-brief soc-shortlist grow-a-tech-tree requirements-review)
 
 selected=()
 if [[ -z "$ONLY" ]]; then
