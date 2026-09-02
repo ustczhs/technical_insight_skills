@@ -13,6 +13,25 @@
 | risk | 风险 | 假设少、可回滚或可试点 | 依赖多、合规/技术不确定性高 |
 | timing | 时机 | 现在做有窗口或解锁后续 | 可等、前置未就绪 |
 
+## 消费 Delivery Sketch（强制）
+
+Value Verdict **必须**包含「交付草图（引自澄清）」节，原文或摘要引用澄清稿中的：
+
+`tech_route` · `integration_surface` · `effort_band` · `duration_band`
+
+并且：
+
+- `cost_complexity` / `risk` / `timing` 的档位与一句话理由须**点名引用** Sketch（路线、触及面、人力档、工期档中至少相关项）
+- Do / Defer / Don't 的推荐理由也须带上 Sketch，禁止纯价值空转
+- **不**因人力/工期档偏高而设硬闸禁止 Do（那是权衡，不是 Conflicts）
+
+### 待定规则
+
+Delivery Sketch 任一项为「待定」时：
+
+- `confidence` **不得**为 `high`
+- 若仍推荐 **Do**：须**单独成题**请用户确认「在路线/触及面/人力/工期仍待定的前提下接受 Do」；未接受则默认偏 **Defer**
+
 ## 档位（定性）
 
 每维使用三档之一（可在产物中写中文）：
@@ -29,8 +48,8 @@
 
 | 结论 | 何时推荐 |
 |------|----------|
-| **Do** | 澄清 Ready；Conflicts / Already-covered 已解消；用户价值与增量不明显偏低；用户接受主要风险 |
-| **Defer** | 有价值但时机/前置/置信度不足；或 Corpus Unknown 且用户未接受无文档对齐风险 |
+| **Do** | 澄清 Ready；Conflicts / Already-covered 已解消；用户价值与增量不明显偏低；用户接受主要风险；若 Sketch 有待定则已通过显式接受题 |
+| **Defer** | 有价值但时机/前置/置信度不足；或 Corpus Unknown 且用户未接受无文档对齐风险；或 Sketch 待定且用户未接受带待定的 Do |
 | **Don't** | 增量不足、战略偏离、或 Conflicts/Already-covered 且用户选择不做 |
 
 薄 Corpus / 大量 Unknown → 结论须标 **confidence: low**，默认更偏 **Defer**，除非用户显式接受风险。
