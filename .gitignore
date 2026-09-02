@@ -13,6 +13,11 @@ requirements/
 # Local worked examples (product trees / shortlists — keep private, do not publish)
 skills/*/examples/
 
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
 # OS / editor
 .DS_Store
 Thumbs.db
