@@ -8,8 +8,9 @@
 2. 确认 **project_slug**（推荐答案：从用户表述 / 已有 `$PROJECTS_ROOT/*` 推断）。
 3. 检查 `$PROJECTS_ROOT/<project_slug>/PROJECT.md`：
    - **存在** → 读入简介与 Corpus 指针，继续本 skill。
-   - **不存在** → 说明须先建档；**推荐**按 [PROJECT-template.md](PROJECT-template.md) 做**最小建档**（元信息 + 一句话简介 + 空表），或请用户改走 `/project-dossier`。用户确认后写入再继续。
+   - **不存在** → 说明须先建档；**推荐**按 [PROJECT-template.md](PROJECT-template.md) 做**最小建档**（元信息 + 一句话简介 + 空表），或请用户改走 `/project-dossier`。逐步确认：用选择题等人确认后写入。**Lazy（分析叶子）**：采用推荐最小建档，不暂停。
 4. **只写入** `$PROJECTS_ROOT/<project_slug>/` 下本簇子目录；发现工作区相对 `projects/`、仓库根级旧 `research/` / `opportunities/` 等有同名产物时**提示**迁移，不自动搬家、不双写。
+5. 问询形态与 Lazy：见 [ask-and-lazy.md](ask-and-lazy.md)。分析叶子在闸门通过后、业务 Grill 前问 Lazy（推荐关）。`project-dossier` 不提供 Lazy 连跑。
 
 ## 索引回写（允许改动的 PROJECT.md 范围）
 
