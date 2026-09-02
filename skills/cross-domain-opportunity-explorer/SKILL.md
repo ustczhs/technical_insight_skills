@@ -38,7 +38,7 @@ disable-model-invocation: true
 6. **四杀伤 + Spark Score** 进 shortlist。晋升 candidate 须写 Spark Score（见 [shared/spark-collision.md](shared/spark-collision.md)）。candidate 中头戴/眼戴占比 ≤50%。
 7. **三种介入形态**比较；手机可充分解决则不强造硬件。
 8. **医疗边界**仅记录，不进 shortlist。
-9. **Decision Grill**：正式跑闸门③④必问（资源、首验对象）；演示/验证跑可继承默认。一次一题。
+9. **Decision Grill**：逐步确认下正式跑闸门③④必问（资源、首验对象）；一次一题、选择题+推荐+「其他（请补充）」。**Lazy**：①–⑤全用推荐，不问。
 10. **只写** `$PROJECTS_ROOT/<project_slug>/opportunities/`。禁止写入仓库相对 `opportunities/` 或工作区根级旧目录；发现只提示迁移，不双写。
 11. 产物中文为主；对人输出套 [shared/session-brief.md](shared/session-brief.md)。只回写 `PROJECT.md` §4 `opportunities` 行及 `updated`。
 
@@ -47,7 +47,8 @@ disable-model-invocation: true
 1. 运行 `project-dossier/scripts/ensure-projects-root.sh`，确认 `project_slug`。
 2. 无 `PROJECT.md` 则最小建档或引导 `/project-dossier`。
 3. `LANDSCAPE.md` 写 `batch_id` 与 `stage`（0–7）。中断则从断点续，不整批重撞火花。
-4. 已有 `opportunities/`：继续 / 修订 / 新开批次 — 不明则问。
+4. 已有 `opportunities/`：（单选）继续 / 修订 / 新开批次 / 其他（请补充）；不明则问，推荐继续。
+5. **空柜第一题是闸门**（slug / 最小建档），不是 Lazy。闸门通过后，新批次或未完成且无 run_mode=lazy：问 Lazy（推荐关）。开则七段连跑，Decision Grill 全跳。格式见 [../project-dossier/shared/ask-and-lazy.md](../project-dossier/shared/ask-and-lazy.md)。
 
 ## 七段流程
 

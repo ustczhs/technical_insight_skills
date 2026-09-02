@@ -15,6 +15,8 @@ disable-model-invocation: true
 **不是**完整 PRD。术语以本簇 [CONTEXT.md](../CONTEXT.md) 为准。  
 ADR：[docs/adr/0001-retrieval-decoupled-from-family.md](../docs/adr/0001-retrieval-decoupled-from-family.md)。
 
+**路径解析**：本叶子在簇内子目录。读 `../shared/`、`../CONTEXT.md`、`../docs/`、`../../project-dossier/` 时，必须以本 `SKILL.md` 经 **realpath** 后的目录为基准；禁止用 Cursor 安装处的 symlink 路径拼接（否则 `../shared` 会落到不存在的 `.cursor/skills/shared`）。闸门脚本用已安装 `project-dossier` 叶子内 `scripts/ensure-projects-root.sh`，或包内 `skills/project-dossier/scripts/ensure-projects-root.sh`。
+
 ## Principles
 
 1. **第一性原理**：维度与约束服务于「产品要成立需要硅片具备什么能力」。
@@ -30,8 +32,8 @@ ADR：[docs/adr/0001-retrieval-decoupled-from-family.md](../docs/adr/0001-retrie
 2. Read [CONTEXT.md](../CONTEXT.md)
 3. Read [shared/brief-template.md](../shared/brief-template.md)、[shared/application-domains.md](../shared/application-domains.md)、[shared/silicon-classes.md](../shared/silicon-classes.md)
 4. Check workspace `$PROJECTS_ROOT/<project_slug>/selection/sources/` and context `brief_sources`（若有）
-5. 若 context 已带 `application_domains` / `primary_silicon_class` 等门户预填：作为推荐项，仍须产品确认
-6. Ask Dimension Turns in batches (1–5)；每题给 **recommended answer** 与 **recommended constraint grade**
+5. 若 context 已带 `application_domains` / `primary_silicon_class` 等门户预填：作为推荐项，仍须产品确认（逐步确认）；**Lazy** 直接采用推荐。
+6. 问询：[ask-and-lazy.md](../../project-dossier/shared/ask-and-lazy.md)。**一次一题**；每题给 **recommended answer** 与 **recommended constraint grade**（同一 Dimension Turn，不算两题）。禁止一批 1–5 维。项目闸门后、Step 0 业务题前问 **Lazy**（推荐关）；开则推荐值填完全部维并 `brief_ready`。
 7. Do not start Phase 2 search here
 8. Brief Ready 后回写 `PROJECT.md` §4 selection 一行
 
@@ -53,7 +55,7 @@ Phase 1 Progress:
 
 ### Step 0 — 产品概念
 
-用 3–8 句收集：做什么、给谁、关键场景。深度以能推导硬件约束为限。
+用 3–8 句收集：做什么、给谁、关键场景。深度以能推导硬件约束为限。逐步确认不足时用选择题补一题。**Lazy**：从用户首句推断，不追问。
 
 ### Step 0b — Application Domain
 
@@ -62,7 +64,7 @@ Phase 1 Progress:
 - 词表：[shared/application-domains.md](../shared/application-domains.md)
 - 例：摩托车机器人 → `motorcycle` + `light_ev`
 - 自定义未入表 → 写入 Brief，且 `needs_seed_extension=true`
-- 门户若已预填：复述并请确认/修改（可一批题）
+- 门户若已预填：复述并请确认/修改（**一次一题**；多域用（多选）一题）
 
 ### Step 1 — Product Family
 
@@ -75,7 +77,7 @@ Phase 1 Progress:
 
 若都不贴：标 **Out-of-Family**（轻量 Profile）。明示：这只影响问卷，**不**降低 Phase 2 检索质量（检索看 Class/Domain）。
 
-**闸门**：Family 未确认前，**不得**产出跨 Profile 的结构化 Source-Derived Draft。
+**闸门**：Family 未确认前，**不得**产出跨 Profile 的结构化 Source-Derived Draft。**Lazy**：采用推荐 Family（或 Out-of-Family），不暂停。
 
 ### Step 1b — primary Silicon Class
 
@@ -93,15 +95,15 @@ Phase 1 Progress:
 
 ### Step 3 — Dimension Turn（Core）
 
-对 Profile 内每个 Core Dimension 做 Dimension Turn（门户可一批 1～5）。Out-of-Family 仅其轻量维。
+对 Profile 内每个 Core Dimension 做 Dimension Turn（**一次一维**；同一回复取值+等级）。Out-of-Family 仅其轻量维。**Lazy**：每维采用推荐答案与推荐等级，不等人。
 
 ### Step 4 — Extensions
 
-按 Profile 触发表与 Source Residue 提议 Extension；确认后同等 Dimension Turn。
+按 Profile 触发表与 Source Residue 提议 Extension；（单选）确认是否纳入后同等 Dimension Turn。**Lazy**：按推荐纳入/跳过。
 
 ### Step 4b — adjacent Silicon Class 复核
 
-根据已确认 Hard（及关键 Soft 能力）套用 [silicon-classes.md](../shared/silicon-classes.md) 触发表，提出 adjacent 列表 → 产品确认一次。  
+根据已确认 Hard（及关键 Soft 能力）套用 [silicon-classes.md](../shared/silicon-classes.md) 触发表，提出 adjacent 列表 → 逐步确认下一题产品确认。**Lazy**：采用推荐 adjacent 列表。  
 写入元信息 `adjacent_silicon_classes`。
 
 ### Step 5 — Export & Brief Ready
@@ -119,7 +121,7 @@ Phase 1 Progress:
 - 每项约束等级已确认；Framing–Spec Mapping 齐全
 - 文首 `brief_status` = `brief_ready`
 
-告知：技术端用 **`soc-shortlist`**；Phase 2 按 Class∪Domain 覆盖检索。
+告知：技术端用 **`soc-shortlist`**；Phase 2 按 Class∪Domain 覆盖检索。**Lazy**：达到上列条件即标 `brief_ready`，文首注明 Lazy。
 
 ## Rules
 

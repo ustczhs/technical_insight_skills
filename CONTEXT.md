@@ -32,8 +32,8 @@ _Avoid_: 以当前代码仓相对 `projects/` 为唯一写入根, 根级平铺 `
 _Avoid_: 无 project_slug 的写入, 把示例目录当成运行时落盘位置, 将含具体产品结论的 examples 提交入库
 
 **Project Dossier Gate**:
-任一分析叶子启动前须解析 Projects Root、确认 `project_slug`，并确保存在 `$PROJECTS_ROOT/<project_slug>/PROJECT.md`（可最小建档或引导 `/project-dossier`）。发现工作区相对 `projects/` 或根级旧产物只提示迁移，不自动搬家、不双写。
-_Avoid_: 无档案仍写入导致孤儿目录, 分析 skill 自动串跑其他簇
+任一分析叶子启动前须解析 Projects Root、确认 `project_slug`，并确保存在 `$PROJECTS_ROOT/<project_slug>/PROJECT.md`（可最小建档或引导 `/project-dossier`）。发现工作区相对 `projects/` 或根级旧产物只提示迁移，不自动搬家、不双写。分析叶子问询与 Lazy：[skills/project-dossier/shared/ask-and-lazy.md](./skills/project-dossier/shared/ask-and-lazy.md)。
+_Avoid_: 无档案仍写入导致孤儿目录, 分析 skill 自动串跑其他簇, 未开 Lazy 却跳过确认闸门
 
 **Index Write-back**:
 分析叶子写完本簇产物后，仅可更新 `PROJECT.md` 的需求索引 / 产物索引约定行；简介、status、Corpus 列表由 `project-dossier` 维护。
@@ -54,7 +54,7 @@ _Avoid_: 调研→Brief→技术树强制流水线, 包级「软衔接」字段�
 | Agent | 每个叶子 `SKILL.md` + `description`（触发词不抢其他簇） |
 | 术语 | 簇内或 skill 内 `CONTEXT.md`；**勿**把簇专有词堆进仓库根 CONTEXT |
 | 产出 | 落在 `projects/<project_slug>/` 下本簇子目录；本地 `examples/` 可选且默认不入库 |
-| shared | **仅簇内**；禁止新建包级 shared 耦合多簇分析逻辑（项目闸门文档放在 `project-dossier/shared/`，由各叶子引用或内联同等规则） |
+| shared | **仅簇内**；禁止新建包级 shared 耦合多簇分析逻辑（项目闸门与问询/Lazy 公约放在 `project-dossier/shared/`，由各叶子引用） |
 | 安装 | 列入 [scripts/install-skills.sh](./scripts/install-skills.sh) 的叶子列表 |
 | 可选外部依赖 | 若需要仓外 skill/MCP，写入 ensure-optional-deps 并由 SKILL 在使用前调用 |
 

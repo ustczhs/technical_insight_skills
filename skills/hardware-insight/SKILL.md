@@ -25,7 +25,7 @@ description: >-
 1. 通过项目闸门；创建或读取目录 `$PROJECTS_ROOT/<project_slug>/research/`。
 2. 读取 `$PROJECTS_ROOT/<project_slug>/research/进度.md`（若存在）确定当前步骤；否则从 Step 0 开始。
 3. 若 `调研基调.md` 存在且 `Step 0 状态：已确认` → **跳过 Step 0 问询与 Lazy 第一题**，从当前步骤续跑（已确认的 `交互模式` 仍有效）。
-4. 否则：**必须**先读 [references/intent-discovery.md](references/intent-discovery.md)，在 Step 0 问询之前问 **Lazy 模式**（见该文件 §Lazy；推荐默认关）。
+4. 否则：**必须**先读 [references/intent-discovery.md](references/intent-discovery.md)，在 Step 0 问询之前问 **Lazy 模式**（见该文件 §Lazy；推荐默认关）。须已通过项目闸门（slug / `PROJECT.md`）；空柜第一题不是 Lazy。
 5. 若用户选开 Lazy → 按 §Lazy 用推荐值填基调并连跑 Step 0–8，**不再**在 0/1/2/8 等人。
 6. 若用户选关 Lazy → 执行 Step 0 意图发现（选择题、一次一题）。
 7. 每步完成后更新 `进度.md`，再进入下一步。

@@ -1,6 +1,6 @@
 # 问询形态与 Lazy（分析叶子共用）
 
-权威：本文件。`hardware-insight` 另有 [intent-discovery.md](../../hardware-insight/references/intent-discovery.md) 细则，**不得与本节冲突**（一次一题、推荐、末项其他、Lazy 默认关、开则跳完全部本 skill 闸门）。
+权威：本文件。`hardware-insight` 的 [intent-discovery.md](../../hardware-insight/references/intent-discovery.md) 是调研专用展开，**不得与本节冲突**。
 
 `project-dossier` **只遵守 §A**，**不提供** §Lazy 连跑（禁止静默建档/覆盖索引）。
 
@@ -33,7 +33,8 @@
 
 **分析叶子**：`hardware-insight`、`cross-domain-opportunity-explorer`、`hardware-selection-brief`、`soc-shortlist`、`grow-a-tech-tree`、`requirements-review`。
 
-**时机**：项目闸门（slug / 最小建档）之后、本 skill 业务 Grill 之前。续跑且本流程已有「已确认/ready/complete」状态则**不问** Lazy。
+**时机**：项目闸门（slug / 最小建档）之后、本 skill 业务 Grill 之前。续跑且本流程已有「已确认/ready/complete」状态则**不问** Lazy。  
+**空柜**：隔离根或目标 slug 尚无 `PROJECT.md` 时，对人第一题是闸门（slug / 最小建档），**不是** Lazy。
 
 **第一题**（单选），**推荐关**：
 

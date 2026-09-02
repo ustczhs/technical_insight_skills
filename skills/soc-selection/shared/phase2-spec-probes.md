@@ -12,9 +12,10 @@
 
 1. 从 Brief 读出 `primary_silicon_class`、`adjacent_silicon_classes`、相关 Hard，以及可选的 `sub_form`
 2. **只加载**下方与主 Class（及确有分叉时的相邻 Class）对应的探针包；禁止用 `audio_sip` 包去问 `display_mcu` 方案
-3. 在包内再按「通用触发」决定追问哪些；一次一问
+3. 在包内再按「通用触发」决定追问哪些；一次一问；题干（单选），末项「其他（请补充）」
 4. 问法用**技术规格选项**（通道数、接口类型、UART 数量档），不要改成 Phase 1 体验 Framing
 5. 对跨 Class 候选，仍用**本产品主 Class**探针口径对照其手册
+6. **Lazy**：触发探针采用推荐取值+等级，不等人；公开规格冲突则记 Uncertainty
 
 | primary_silicon_class | 形态包入口 |
 |----------------------|------------|

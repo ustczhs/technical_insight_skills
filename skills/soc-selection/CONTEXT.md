@@ -75,8 +75,8 @@ _Avoid_: Unknown, TBD, 不确定（口语上不等于 Unconstrained）
 _Avoid_: 字段值（过于实现向）
 
 **Dimension Turn**:
-Phase 1 对某一维度的单次用户回合：在同一回复中同时给出 Dimension Answer 与约束等级（hard / soft / unconstrained）；Agent 须提供推荐等级，但不再拆成「先取值、再单独确认等级」两问。
-_Avoid_: 两步等级确认, 取值与等级分问
+Phase 1 对某一维度的单次用户回合：在同一回复中同时给出 Dimension Answer 与约束等级（hard / soft / unconstrained）；Agent 须提供推荐等级，但不再拆成「先取值、再单独确认等级」两问。题干（单选），末项「其他（请补充）」。**逐步确认一次一维**；**Lazy 跳过等人、采用推荐。**
+_Avoid_: 两步等级确认, 取值与等级分问, 一批多维连发
 
 **Brief Source**:
 选型线上供 Phase 1 使用的外部输入文件，落在 Case Workspace（如 `$PROJECTS_ROOT/<project_slug>/selection/sources/`）。是 Selection Brief 的输入溯源，不是 Artifact；Portal 负责上传与落盘，**不**在门户侧做维度映射。可在「开始 Brief」前上传（0～N），也可在 Brief Ready 前追加。追加不得静默改写**已确认**的 Dimension Answer / grade；若新源与已确认维冲突，须显式闸门询问是否重开该维的 Dimension Turn。v1 **承诺**可抽取：`.txt` / `.md` / `.csv` / `.xlsx`/`.xls` / 含文本层的 `.pdf` / `.docx`。图片与扫描件 PDF 为**尽力**（失败写入 Source Residue「未能抽取」，不阻塞 Phase 1）。
@@ -91,7 +91,7 @@ _Avoid_: 静默丢弃, 自动自定义维并当正式约束
 _Avoid_: 定稿 Brief 抹掉来源, 维度总表强制 source 列撑爆主表, Phase 2 按溯源附录筛选
 
 **Source-Derived Draft**:
-由 **Phase 1 Skill Run**（`hardware-selection-brief`）从 Brief Source 抽取并映射到 **已确认** Product Family 的 Dimension Profile 后的**未确认**草案：含建议的 Dimension Answer 与建议 grade，以及可追溯到原文的摘录。Brief Source 可在 Family 确认前上传，但**不得**在 Family 未定时产出跨 Profile 的结构化草案。升格路径与普通维度相同：走 **Dimension Turn**（门户可按批 1～5 题预填建议值与建议 grade）；不引入单独的「Draft 总览确认」回合类型。映射不上的内容进 **Source Residue**，不进 Draft。多份 Brief Source 对同一维冲突时：仍只出**一条** Draft，题面标注各方摘录，由 Agent 给一条推荐（默认偏更严或更可验证的 Spec），用户在 Dimension Turn 裁定。未确认前不得计入 Brief Ready，也不得静默写入正式 Hard Constraint / Soft Preference。
+由 **Phase 1 Skill Run**（`hardware-selection-brief`）从 Brief Source 抽取并映射到 **已确认** Product Family 的 Dimension Profile 后的**未确认**草案：含建议的 Dimension Answer 与建议 grade，以及可追溯到原文的摘录。Brief Source 可在 Family 确认前上传，但**不得**在 Family 未定时产出跨 Profile 的结构化草案。升格路径与普通维度相同：走 **Dimension Turn**（逐步确认一次一维；Lazy 用推荐升格）；不引入单独的「Draft 总览确认」回合类型。映射不上的内容进 **Source Residue**，不进 Draft。多份 Brief Source 对同一维冲突时：仍只出**一条** Draft，题面标注各方摘录，由 Agent 给一条推荐（默认偏更严或更可验证的 Spec），用户在 Dimension Turn 裁定（Lazy 采用该推荐）。未确认前不得计入 Brief Ready，也不得静默写入正式 Hard Constraint / Soft Preference（Lazy 的「确认」= 采用推荐并标注）。
 _Avoid_: 约束项（口语）, 直接当 Hard, 静默写入 Brief, Family 未定就绑维度 id, Draft Review Turn, Portal 确定性管道直接出 Hard/Soft, 同维多条并行 Draft, 后上传静默覆盖先上传
 
 **Product Framing**:
@@ -139,7 +139,7 @@ _Avoid_: 信息过期（口语判断，无阈值）
 _Avoid_: 一般陈述, 背景介绍
 
 **Brief Ready**:
-Selection Brief 可进入 Phase 2 的状态：当前 Dimension Profile 内全部 Core Dimension（及已纳入的 Extension Dimension）均已具备 Dimension Answer（含显式 Unconstrained），且每维约束等级已在 Dimension Turn 中由产品确认。
+Selection Brief 可进入 Phase 2 的状态：当前 Dimension Profile 内全部 Core Dimension（及已纳入的 Extension Dimension）均已具备 Dimension Answer（含显式 Unconstrained），且每维约束等级已在 Dimension Turn 中确认（逐步确认=产品确认；Lazy=推荐值）。
 _Avoid_: Phase 1 结束（口语，无检查标准）
 
 **Near-Miss**:
@@ -155,5 +155,5 @@ Phase 2 在公开检索后按需发起的技术向追问：用于补齐 Brief �
 _Avoid_: 每轮必问全表, 按 Product Family 门控探针, apply_as/run_hard/run_soft/note_only（已废止）, Phase 1 产品 Framing 问卷
 
 **Probe Turn**:
-Phase 2 对某一 Spec Detail Probe 的单次用户回合：在同一回复中同时给出探针取值与约束等级（hard / soft / unconstrained）；问法对齐 Dimension Turn（推荐答案 + 推荐等级；允许 `B / Hard` 或自定义）。
+Phase 2 对某一 Spec Detail Probe 的单次用户回合：在同一回复中同时给出探针取值与约束等级（hard / soft / unconstrained）；问法对齐 Dimension Turn（推荐答案 + 推荐等级；末项「其他（请补充）」）。**Lazy 采用推荐、不等人。**
 _Avoid_: 两步等级确认, 取值与等级分问, apply_as

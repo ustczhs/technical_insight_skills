@@ -1,6 +1,6 @@
 # 意图发现与问询（Step 0–2）
 
-内嵌 brainstorming（语境扫描、一次一题、分段确认）与 grilling（决策树压测、事实自查、共识前不执行）思想。**不 invoke** 外部 skill。
+内嵌 brainstorming（语境扫描、一次一题、分段确认）与 grilling（决策树压测、事实自查、共识前不执行）思想。**不 invoke** 外部 skill。包级问询/Lazy 公约：[../../project-dossier/shared/ask-and-lazy.md](../../project-dossier/shared/ask-and-lazy.md)（本节为调研展开，冲突时以更严的一次一题为准）。
 
 **读取边界**
 

@@ -24,15 +24,15 @@ disable-model-invocation: true
 
 1. **项目闸门**：先确认 `project_slug`；无 `PROJECT.md` 则最小建档或引导 `/project-dossier`，再继续。
 2. **双产物顺序闸门**：先澄清，再价值。未 `clarification_status = ready` 不得定稿正式 Value Verdict。
-3. **一次只推进一个决策**（默认）；低耦合维可一批 ≤3。下列必须**单独成题**：Corpus 纳入确认、Corpus Relation、clarification ready 确认、最终 Do/Defer/Don't；若 Delivery Sketch 有「待定」且仍推 Do，须再单独成题显式接受。
+3. **一次只推进一个决策**；低耦合维也**不得**一批多题。下列必须**单独成题**：Corpus 纳入确认、Corpus Relation、clarification ready 确认、最终 Do/Defer/Don't；若 Delivery Sketch 有「待定」且仍推 Do，须再单独成题显式接受。
 4. **每个决策必须带推荐答案**；禁止让用户对着空白枚举。
-5. **Grill 输出用选择题**：面向用户的决策题按 [shared/grill-output.md](shared/grill-output.md) 输出——实质选项 2–4 个并标注 `（推荐）`，**最后一项固定为「其他 / 自定义」**供用户改写；禁止只写「同意 / 或改写」而无选项列表。
+5. **Grill 输出用选择题**：按 [shared/grill-output.md](shared/grill-output.md) 与 [../project-dossier/shared/ask-and-lazy.md](../project-dossier/shared/ask-and-lazy.md)——题干标（单选）或（多选），实质选项 2–4 个并标注 `（推荐）`，**最后一项固定为「其他（请补充）」**。
 6. **推荐要高质量**：结合 Project Corpus（优先 `$PROJECTS_ROOT/<project_slug>/corpus/`）、本 skill `shared/`、以及**主动联网检索**。检索失败则降级为仅本地，不阻塞。
 7. **来源分型**：写入产物时区分 **Corpus（本地权威）** vs **Web（外部参考）**。Web 默认仅参考；升格进结论前须用户确认，并标注 URL。v1 **不设**域名白名单。
 8. **Conflicts / Already-covered 未解消 → 不得推荐 Do**。
 9. **薄 Corpus / Unknown**：可继续；`confidence` 倾向 low；默认更偏 Defer，除非用户显式接受无文档对齐风险。
-10. **Delivery Sketch 闸门**：`tech_route` / `integration_surface` / `effort_band` / `duration_band` 均须用户确认（可为「待定」）后才可 ready；Verdict 必须引用草图；`cost_complexity` / `risk` / `timing` 与结论理由须点名引用。人力/工期偏高**不**设禁 Do 硬闸。Sketch 任一项待定 → `confidence` 不得 high；推 Do 须显式接受。
-11. 能从仓库/上下文查到的事实自己查；**决策权在用户**。未达共同理解前，不宣称评审完成。
+10. **Delivery Sketch 闸门**：逐步确认下 `tech_route` / `integration_surface` / `effort_band` / `duration_band` 均须用户确认（可为「待定」）后才可 ready。**Lazy**：用推荐值填齐（避免无据「待定」充确认），再 ready。Verdict 必须引用草图；`cost_complexity` / `risk` / `timing` 与结论理由须点名引用。人力/工期偏高**不**设禁 Do 硬闸。Sketch 任一项待定 → `confidence` 不得 high；推 Do 须显式接受（Lazy：若仍推 Do，在 Verdict 写明已按推荐接受待定）。
+11. 能从仓库/上下文查到的事实自己查；**决策权在用户**（Lazy 下用推荐值代确认）。未达共同理解前，不宣称评审完成（Lazy 完成整链后可宣称，须标注 Lazy）。
 12. 产物与追问以**中文**为主；术语可用 CONTEXT 中的英文标签。
 13. **索引回写**：完成后更新 `PROJECT.md` §3 需求索引对应行（及 `updated`）；勿改简介/Corpus 列表/status。
 
@@ -47,10 +47,11 @@ disable-model-invocation: true
 
 ### 0. 启动
 
-- 通过项目闸门。
+- 通过项目闸门。读 [../project-dossier/shared/ask-and-lazy.md](../project-dossier/shared/ask-and-lazy.md)。
 - 收集 **Requirement Seed**；确定 **req_slug**（默认英文或拼音）。
 - 目录：`$PROJECTS_ROOT/<project_slug>/requirements/<req_slug>/`。
-- 若目录已有产物：询问继续 / 修订 / 新建。
+- 若目录已有产物：（单选）继续 / 修订 / 新建 / 其他（请补充）；推荐继续。
+- 无 ready 产物时：闸门通过后再问 Lazy（推荐关）。空柜对人第一题是 slug / 最小建档。开 Lazy 则推荐值跑完澄清+Verdict+索引回写，跳过下列等人闸门。
 - 读取 [CONTEXT.md](CONTEXT.md)、[shared/clarification-dimensions.md](shared/clarification-dimensions.md)、[shared/value-dimensions.md](shared/value-dimensions.md)、[shared/corpus-discovery.md](shared/corpus-discovery.md)、[shared/grill-output.md](shared/grill-output.md)。
 
 ### 1. Project Corpus
@@ -66,7 +67,7 @@ disable-model-invocation: true
 - `constraints` **不**再承担工期主责（见 `duration_band`）。
 - 整条需求标注 **Corpus Relation**——**单独成题**（选择题）。
 - 增量写入 `…/CLARIFIED_REQUIREMENT.md`（模板：[shared/clarified-requirement-template.md](shared/clarified-requirement-template.md)），含 § Delivery Sketch。
-- 四维均已确认后，再请用户确认 `clarification_status = ready`（选择题）。
+- 四维均已确认后，再请用户确认 `clarification_status = ready`（选择题）。**Lazy**：推荐 ready 并落盘。
 
 ### 3. Value Verdict
 
@@ -74,7 +75,7 @@ disable-model-invocation: true
 - 先写入/展示对 Delivery Sketch 的引用，再做六维定性评估（可用一题确认「同意修订六维 / 调整某维 / 自定义」）。
 - `cost_complexity` / `risk` / `timing` 与结论理由须引用 Sketch。
 - 推荐 Do / Defer / Don't（**单独成题**）；Sketch 有待定且推 Do 时再**单独成题**显式接受。
-- 写入 `…/VALUE_VERDICT.md`；确认后 `verdict_status = final`。
+- 写入 `…/VALUE_VERDICT.md`；逐步确认后 `verdict_status = final`。**Lazy**：推荐结论落盘即为 final，标注 Lazy。
 
 ### 4. 收尾
 

@@ -39,11 +39,17 @@ if [[ -f "$DIR/SEED_CATALOG.md" ]]; then
   :
 fi
 
-cells=$(grep -cE '^\| C[0-9]' "$DIR/PEOPLE_LANDSCAPE.md" 2>/dev/null || echo 0)
-sparks=$(grep -cE '^\| S[0-9]' "$DIR/SPARK_BOARD.md" 2>/dev/null || echo 0)
+# grep -c 无匹配时打印 0 且退出码为 1；勿用 `|| echo 0`（会变成 $'0\n0'，[[ -ge ]] 语法错误）
+count_pat() {
+  local n
+  n="$(grep -cE "$1" "$2" 2>/dev/null || true)"
+  printf '%s' "${n:-0}"
+}
+cells="$(count_pat '^\| C[0-9]' "$DIR/PEOPLE_LANDSCAPE.md")"
+sparks="$(count_pat '^\| S[0-9]' "$DIR/SPARK_BOARD.md")"
 
-[[ "${cells:-0}" -ge 40 ]] || die "People Cell $cells < 40 (landscape floor)"
-[[ "${sparks:-0}" -ge 50 ]] || die "Sparks $sparks < 50 (landscape floor)"
+[[ "$cells" -ge 40 ]] || die "People Cell $cells < 40 (landscape floor)"
+[[ "$sparks" -ge 50 ]] || die "Sparks $sparks < 50 (landscape floor)"
 
 if grep -q '| 12–24' "$DIR/LANDSCAPE.md" 2>/dev/null; then
   warn "LANDSCAPE still mentions 12–24 cells (obsolete floor)"

@@ -67,7 +67,7 @@ git clone https://github.com/ustczhs/technical_insight_skills.git ~/code/technic
 ```
 
 安装永远链接**叶子**目录，不要链整个 `skills/soc-selection/`。  
-选型叶子经相对路径读同簇 `../shared/` 与簇内 `CONTEXT.md`。若 Agent 按 symlink 路径（而非 realpath）解析导致读不到，请改以本仓为工作区打开，或确认工具按真实路径解析链接目标。  
+选型叶子经相对路径读同簇 `../shared/` 与簇内 `CONTEXT.md`。**必须**以该叶子 `SKILL.md` 的 realpath 为基准解析；按 Cursor 安装目录的 symlink 路径拼接会读不到。仍失败时改以本仓为工作区打开。  
 drawio MCP 写入 `~/.cursor/mcp.json` 后可能需重启 Cursor 才会出现。
 
 ## 用法（按簇）

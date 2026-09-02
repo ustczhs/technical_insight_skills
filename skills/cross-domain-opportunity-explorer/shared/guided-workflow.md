@@ -10,7 +10,7 @@
 |------|-----|
 | batch_id | 如 `2026-08-18-landscape` |
 | stage | `0` … `7` 或 `done` |
-| run_mode | `formal` / `demo` |
+| run_mode | `formal` / `demo` / `lazy` |
 
 中断从当前 `stage` 续跑：已有 Spark Board 则扩写/去重，不整表重生成。
 
@@ -27,7 +27,9 @@
 | 6 | 筛选 | 矩阵；shortlist ≤3 且有 fact/voice | **闸门③ 必问**（`demo` 可默认 2 条并行） | `PORTFOLIO_MATRIX`、`SHORTLIST` |
 | 7 | 验证交接 | brief + handoff + `SESSION_BRIEF` | **闸门④ 必问**；⑤ 有默认路由仍问一次 | 验证与交接 |
 
-`demo` / 用户说「自动跑一轮」：闸门①②可继承；③④仍应在 `SESSION_BRIEF` 给出推荐并视为可默认执行，正文写明「已按推荐推进，可改」。
+`demo` / 用户说「自动跑一轮」：**视为开 Lazy**（见 [ask-and-lazy.md](../../project-dossier/shared/ask-and-lazy.md)）——闸门①–⑤全部用推荐值，不等人；`SESSION_BRIEF` 写明「Lazy 默认，可改」。
+
+`lazy` 与 `demo`：`lazy` 跳过全部 Decision Grill；旧 `demo` 口径并入 Lazy。
 
 ## 默认
 

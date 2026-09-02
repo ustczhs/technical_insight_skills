@@ -12,7 +12,9 @@ disable-model-invocation: true
 
 技术端 skill：读取 **Brief Ready** 的 Selection Brief，以 **primary Silicon Class + adjacent Classes + Application Domain** 为覆盖锚搜索公开资料，产出 **SoC Shortlist**（+ 必要时 **Near-Miss**）。  
 允许有限的 **Phase 2 Clarification**（含按需 **Spec Detail Probe**），**不是**产品维度重 grill。  
-术语：[CONTEXT.md](../CONTEXT.md)。证据：[shared/evidence-rules.md](../shared/evidence-rules.md)。探针：[shared/phase2-spec-probes.md](../shared/phase2-spec-probes.md）。种子：[shared/vendor-seeds.md](../shared/vendor-seeds.md)。Class/Domain：[shared/silicon-classes.md](../shared/silicon-classes.md)、[shared/application-domains.md](../shared/application-domains.md)。
+术语：[CONTEXT.md](../CONTEXT.md)。证据：[shared/evidence-rules.md](../shared/evidence-rules.md)。探针：[shared/phase2-spec-probes.md](../shared/phase2-spec-probes.md)。种子：[shared/vendor-seeds.md](../shared/vendor-seeds.md)。Class/Domain：[shared/silicon-classes.md](../shared/silicon-classes.md)、[shared/application-domains.md](../shared/application-domains.md)。
+
+**路径解析**：本叶子在簇内子目录。读 `../shared/`、`../CONTEXT.md`、`../../project-dossier/` 时，必须以本 `SKILL.md` 经 **realpath** 后的目录为基准；禁止用 Cursor 安装处的 symlink 路径拼接（否则 `../shared` 会落到不存在的 `.cursor/skills/shared`）。闸门脚本用已安装 `project-dossier` 叶子内 `scripts/ensure-projects-root.sh`，或包内 `skills/project-dossier/scripts/ensure-projects-root.sh`。
 
 ## Principles
 
@@ -29,7 +31,8 @@ disable-model-invocation: true
 3. Load the Brief（`$PROJECTS_ROOT/<project_slug>/selection/SELECTION_BRIEF.md`）
 4. Read shortlist-template、vendor-seeds、silicon-classes、application-domains；skim phase2-spec-probes
 5. **Refuse** full Phase 2 if `brief_status` ≠ `brief_ready`，或缺少 `primary_silicon_class` / 未确认的 `application_domains` — 列缺口回 Phase 1
-6. Shortlist 定稿后回写 `PROJECT.md` §4 selection 一行
+6. 问询：[ask-and-lazy.md](../../project-dossier/shared/ask-and-lazy.md)。闸门后、检索前问 **Lazy**（推荐关）。开则跳过 Probe Turn / 3b / 5b 等人，探针用推荐取值+等级（证据不足则 Uncertainty，不把猜测写成 Hard 满足）。
+7. Shortlist 定稿后回写 `PROJECT.md` §4 selection 一行
 
 ## Workflow
 
@@ -89,7 +92,7 @@ Phase 2 Progress:
 2. **只打开** phase2-spec-probes 中对应 Class 包
 3. 禁止按 Product Family 选包（勿因挂靠 companion_robot 而用机器人 AP 包问 display_mcu）
 
-其余 Probe Turn 规则不变：一次一问；选项 + 推荐答案 + 推荐 `hard|soft|unconstrained`；用户同回确认取值与等级；答案不静默写回 Brief；扩大产品能力边界则建议回 Phase 1。
+其余 Probe Turn 规则不变：一次一问；选项 + 推荐答案 + 推荐 `hard|soft|unconstrained`；末项「其他（请补充）」；用户同回确认取值与等级；答案不静默写回 Brief；扩大产品能力边界则建议回 Phase 1。**Lazy**：触发的探针采用推荐，不等人。
 
 **必须追问**（包内满足任一）：Brief 沉默但候选 Hard 分叉；缺口径无法比 Match Band；公开规格冲突需本轮立场。
 
@@ -128,12 +131,12 @@ Phase 2 Progress:
 
 ### Step 5b — Phase 2 Clarification（归属确认）
 
-写出文件前，用**一问**做轻量确认（此步是名单归属，**不是** Probe Turn）：
+写出文件前，逐步确认用**一问**做轻量确认（此步是名单归属，**不是** Probe Turn）：
 
 - 是否接受当前 Shortlist / Near-Miss 划分？  
 - 是否要把某 Near-Miss 升格（仅当不违反 Brief Hard 与 `grade=hard` 探针；否则拒绝并说明）？  
 
-给出推荐（通常：维持证据结论）。用户确认后再落盘。
+给出推荐（通常：维持证据结论）。逐步确认后再落盘。**Lazy**：维持证据结论并落盘，文首注明 Lazy。
 
 ### Step 6 — Export
 

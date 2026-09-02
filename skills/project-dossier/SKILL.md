@@ -19,16 +19,18 @@ disable-model-invocation: true
 术语：[CONTEXT.md](CONTEXT.md)。  
 Projects Root：[shared/projects-root.md](shared/projects-root.md)。  
 布局与闸门：[shared/project-layout.md](shared/project-layout.md)、[shared/project-gate.md](shared/project-gate.md)。  
+问询形态（无 Lazy 连跑）：[shared/ask-and-lazy.md](shared/ask-and-lazy.md)。  
 扉页模板：[shared/PROJECT-template.md](shared/PROJECT-template.md)。
 
 ## 硬规则
 
 1. **每次会话先解析 Projects Root**（见下）；档案只写在该根下，不写到当前 git 工作区相对 `projects/`。
-2. **一次一个决策**，带推荐答案；关键动作（建档、删需求、改 status、sync 覆盖索引）单独确认。
-3. 档案是**活的**：允许对简介、Corpus、需求登记、状态做 CRUD；用 `updated` 反映变更。
-4. **Obsidian 友好**：`PROJECT.md` 当 MOC；链接以相对路径为主；`[[wikilink]]` 可选不强制；不依赖插件。
-5. 能查到的目录/文件自己查；**决策权在用户**（路径解析/建目录/固化按公约自动执行，并告知用户）。
-6. 不自动调用其他簇 skill；可口头建议用户另启。
+2. **一次一个决策**，带推荐答案；题干（单选）或（多选），末项「其他（请补充）」。关键动作（建档、删需求、改 status、sync 覆盖索引）单独确认。格式见 [shared/ask-and-lazy.md](shared/ask-and-lazy.md) **§A only**。
+3. **不提供 Lazy 连跑**：禁止「用推荐值自动建档/覆盖索引」。用户说 lazy/全自动时，仍须对当前主动作做选择题确认（推荐项可预填）。
+4. 档案是**活的**：允许对简介、Corpus、需求登记、状态做 CRUD；用 `updated` 反映变更。
+5. **Obsidian 友好**：`PROJECT.md` 当 MOC；链接以相对路径为主；`[[wikilink]]` 可选不强制；不依赖插件。
+6. 能查到的目录/文件自己查；**决策权在用户**（路径解析/建目录/固化按公约自动执行，并告知用户）。
+7. 不自动调用其他簇 skill；可口头建议用户另启。
 
 ## Step 0 — 解析 / 创建 / 固化 Projects Root（必做）
 
@@ -66,14 +68,14 @@ Projects Root：[shared/projects-root.md](shared/projects-root.md)。
 ### create
 
 1. 完成 Step 0。  
-2. 推荐 `project_slug` 与显示名 → 用户确认。  
+2. 推荐 `project_slug` 与显示名 →（单选）确认 / 改 slug / 其他（请补充）。**推荐**从用户表述推断的 slug。  
 3. 若 `$PROJECTS_ROOT/<project_slug>/` 已存在：改为 update / sync，勿覆盖。  
 4. 按模板写 `PROJECT.md`；创建 `corpus/`、`requirements/`、`research/`、`opportunities/`、`trees/`、`selection/sources/`。
 5. 可选：用户指定初始 Corpus 文件，复制或链接进 `corpus/` 并登记。
 
 ### 其他动作
 
-先 Step 0；按上表执行；每次写盘后更新 `updated`。删改前简述影响并确认。
+先 Step 0；按上表执行；每次写盘后更新 `updated`。删改前简述影响并用选择题确认（推荐：按影响最小的安全项）。
 
 ## 产出
 

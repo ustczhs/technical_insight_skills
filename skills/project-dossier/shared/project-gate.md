@@ -11,6 +11,7 @@
    - **不存在** → 说明须先建档；**推荐**按 [PROJECT-template.md](PROJECT-template.md) 做**最小建档**（元信息 + 一句话简介 + 空表），或请用户改走 `/project-dossier`。逐步确认：用选择题等人确认后写入。**Lazy（分析叶子）**：采用推荐最小建档，不暂停。
 4. **只写入** `$PROJECTS_ROOT/<project_slug>/` 下本簇子目录；发现工作区相对 `projects/`、仓库根级旧 `research/` / `opportunities/` 等有同名产物时**提示**迁移，不自动搬家、不双写。
 5. 问询形态与 Lazy：见 [ask-and-lazy.md](ask-and-lazy.md)。分析叶子在闸门通过后、业务 Grill 前问 Lazy（推荐关）。`project-dossier` 不提供 Lazy 连跑。
+6. **空柜题序（硬）**：对人第一题必须是确认 `project_slug`（无 `PROJECT.md` 时同一题或下一题确认最小建档）。**禁止**把 Lazy 或本 skill 业务 Grill 当作空柜第一题。
 
 ## 索引回写（允许改动的 PROJECT.md 范围）
 
