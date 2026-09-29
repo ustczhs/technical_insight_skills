@@ -2,7 +2,7 @@
 
 细则以 [SKILL.md](./SKILL.md) 为准。本文件仅作步骤目录。
 
-**闸门**：逐步确认时 Step 0 / 1 / 2 / 8 等人；Lazy 时 0–8 连跑不等待。问询：一次一题、选择题+推荐、末项「其他」。  
+**闸门**：先问分析师立场（推荐 TCL 技术规划师），再问 Lazy。逐步确认时 Step 0 / 1 / 2 / 8 等人；Lazy 时 0–8 连跑不等待，且不改写已确认立场。问询：一次一题、选择题+推荐、末项「其他」。  
 **产出根**：`$PROJECTS_ROOT/<project_slug>/research/`
 
 | Step | 名称 | 主要产出 |
@@ -14,8 +14,8 @@
 | 4 | 竞品分析 | `竞品分析.md` |
 | 5 | 技术分析 | `技术分析.md` |
 | 6 | 商业机会 | `商业机会.md` |
-| 7 | 决策综合 | `决策摘要.md` + `swot分析.md` |
-| 8 | 调研输出（闸门） | `output/大纲-*.md` + `output/报告-*.md`；可选信息图 |
+| 7 | 决策综合 | `决策摘要.md` + `swot分析.md`；第一方另加 `五看三定.md` |
+| 8 | 调研输出（闸门） | `output/大纲-*.md` + `output/报告-*.md`（含可选五看三定）；可选信息图 |
 
 Step 0 细节：[references/intent-discovery.md](references/intent-discovery.md)  
 Step 4–8 合成与闸门：[references/report-synthesis.md](references/report-synthesis.md)  

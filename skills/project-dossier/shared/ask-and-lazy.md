@@ -49,15 +49,15 @@
 **开启后**
 
 1. 用模型推荐填满本 skill 全部须确认字段；中途闸门**全部跳过**（含终稿：Brief Ready、Verdict、Shortlist 归属、技术树定稿、探索闸门③④⑤、调研 Step 8）。
-2. 能默认立场则用 **中立第三方**，禁止编造组织名。
+2. 能默认立场则用 **中立第三方**，禁止编造组织名。**例外：`hardware-insight`** 在 Lazy 题之前先问分析师立场，推荐「TCL 技术规划师」（我方主体 TCL，此为已确认默认，不是临场编造）。选「中立第三方」则我方主体为不适用。Lazy **不得**覆盖已确认立场。细则见该 skill 的 `references/intent-discovery.md` §Lazy。
 3. 产物中标注 `交互模式：Lazy` 或等价（「Lazy 默认，非逐步确认」）。
-4. 用户中途说「改成 Lazy」→ 未决闸门改推荐值，从当前步连跑到本 skill 终点。
+4. 用户中途说「改成 Lazy」→ 未决闸门改推荐值，从当前步连跑到本 skill 终点；已确认的分析师立场保持不变。
 
 **各叶子「全流程」**
 
 | 叶子 | Lazy 连跑到 |
 |------|-------------|
-| hardware-insight | Step 0–8 报告 MD（默认决策导向、不出信息图） |
+| hardware-insight | Step 0–8 报告 MD（默认决策导向、不出信息图）。第一方另出 `五看三定.md` 与 `output/报告-五看三定.md`；中立不出五看三定 |
 | requirements-review | Clarified Requirement ready + Value Verdict final + 索引回写 |
 | cross-domain-opportunity-explorer | 七段至 SESSION_BRIEF / Handoff（闸门①–⑤用推荐） |
 | hardware-selection-brief | 全部 Dimension Turn 用推荐 → `brief_ready` |

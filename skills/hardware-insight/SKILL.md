@@ -3,8 +3,10 @@ name: hardware-insight
 description: >-
   Research skill in the Technical Planning Skill Package: structured
   smart-hardware product research — competitor teardown, technical route
-  analysis, market opportunity, and decision summary with reports via
-  templates/report/. Optional infographics are a Step 8 side path only.
+  analysis,   market opportunity, and decision summary with reports via
+  templates/report/. First-party runs also write a 五看三定 source file;
+  Lazy first-party runs include that report. Optional infographics are a
+  Step 8 side path only.
   Use when the user asks for hardware product research, competitor analysis,
   智能硬件调研, 竞品分析, or invokes hardware-insight / basic_flow.
 ---
@@ -24,10 +26,10 @@ description: >-
 
 1. 通过项目闸门；创建或读取目录 `$PROJECTS_ROOT/<project_slug>/research/`。
 2. 读取 `$PROJECTS_ROOT/<project_slug>/research/进度.md`（若存在）确定当前步骤；否则从 Step 0 开始。
-3. 若 `调研基调.md` 存在且 `Step 0 状态：已确认` → **跳过 Step 0 问询与 Lazy 第一题**，从当前步骤续跑（已确认的 `交互模式` 仍有效）。
-4. 否则：**必须**先读 [references/intent-discovery.md](references/intent-discovery.md)，在 Step 0 问询之前问 **Lazy 模式**（见该文件 §Lazy；推荐默认关）。须已通过项目闸门（slug / `PROJECT.md`）；空柜第一题不是 Lazy。
-5. 若用户选开 Lazy → 按 §Lazy 用推荐值填基调并连跑 Step 0–8，**不再**在 0/1/2/8 等人。
-6. 若用户选关 Lazy → 执行 Step 0 意图发现（选择题、一次一题）。
+3. 若 `调研基调.md` 存在且 `Step 0 状态：已确认` → **跳过立场题与 Lazy 题**，从当前步骤续跑（已确认的 `分析师立场` 与 `交互模式` 仍有效）。
+4. 否则：**必须**先读 [references/intent-discovery.md](references/intent-discovery.md)。项目闸门之后、Lazy 之前先问 **分析师立场**（推荐「TCL 技术规划师」，我方主体 TCL）。然后问 **Lazy**（推荐关）。须已通过项目闸门（slug / `PROJECT.md`）；空柜第一题不是立场，也不是 Lazy。
+5. 若用户选开 Lazy → 按 §Lazy 用推荐值填基调并连跑 Step 0–8，**保留已确认立场**，**不再**在 0/1/2/8 等人。
+6. 若用户选关 Lazy → 执行 Step 0 意图发现（选择题、一次一题）；0c **不再重问**已确认的分析师立场与我方主体。
 7. 每步完成后更新 `进度.md`，再进入下一步。
 
 ## 信息时效（核心）
@@ -56,7 +58,7 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 ## 全局规则
 
 - **证据分级**：A（官方/拆解/认证库）> B（权威媒体/供应商）> C（二手信息）；关键结论需 ≥2 处独立来源，标注等级。
-- **分析师立场**：逐步确认模式下 **必填、无默认组织**（用户自填或选中立）。**Lazy 例外**：默认「中立第三方」，`我方主体` 填「不适用」，并在基调中标注「Lazy 默认，非逐步确认」。填「中立第三方」为中立模式，否则为第一方。第一方下竞品用威胁/机会/可借鉴框架，**建议方向主语必须为我方主体**。详见 [references/report-synthesis.md](references/report-synthesis.md)。
+- **分析师立场**：在 Lazy 之前询问。推荐「TCL 技术规划师」，选中则 `我方主体` 为 TCL，不再单问主体。选「中立第三方」则 `我方主体` 为「不适用」。选其他身份时再确认主体。Lazy **不得**把已确认立场改回中立。中立为中立模式，其余为第一方。第一方下竞品用威胁/机会/可借鉴框架，**建议方向主语必须为我方主体**。详见 [references/report-synthesis.md](references/report-synthesis.md)。
 - **中文可读性**：对内可保留 Build/Buy/Partner、O1/M4 等坐标系；写入 brief、决策摘要核心结论、管理层材料时须白话。决策摘要文首宜设「对外口径」对照表。
 - **问询形态**（逐步确认）：一次一题；题干标（单选）或（多选）；必须给推荐项+理由；选项最后一项为「其他（请补充）」。细则见 [intent-discovery.md](references/intent-discovery.md) §A。
 - **交互闸门**：逐步确认时仅在 Step 0、Step 1、Step 2、Step 8 暂停等人；其余步骤自主推进。**Lazy 时 0/1/2/8 均不等待确认**。
@@ -148,24 +150,25 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 ## Step 7：决策综合
 
 - 输入：`竞品分析.md`、`技术分析.md`、`商业机会.md`、`调研基调.md`
-- **执行顺序**：先 `决策摘要.md`，再 `swot分析.md`
+- **执行顺序**：先 `决策摘要.md`，再 `swot分析.md`；第一方再写 `五看三定.md`
 - 输出：
   - `$PROJECTS_ROOT/<project_slug>/research/决策摘要.md`（核心结论、方案选项、主要风险、建议方向）
   - `$PROJECTS_ROOT/<project_slug>/research/swot分析.md`（S/W/O/T 四象限 + SO/ST/WO/WT 2×2 策略矩阵；综合 Step 4–6，主语为我方主体）
-- 审核：结论有调研支撑；回应 Step 0 调研目的；**建议方向主语为我方主体**；含 12/24 月里程碑、资源粗估、明确不做边界；SWOT 四象限与 2×2 矩阵达标。详见 [references/report-synthesis.md](references/report-synthesis.md)
-- **边界**：SWOT 正文**不得**并入 `决策摘要.md`；Step 8 **不强制**读取 `swot分析.md`
+  - 第一方：`$PROJECTS_ROOT/<project_slug>/research/五看三定.md`（看行业、看客户、看竞争、看自己、看机会、定控制点、定目标、定策略）。中立模式不写此文件，进度记「不适用」
+- 审核：结论有调研支撑；回应 Step 0 调研目的；**建议方向主语为我方主体**；含 12/24 月里程碑、资源粗估、明确不做边界；SWOT 四象限与 2×2 矩阵达标。第一方五看三定八节齐全，且三定不得与决策摘要建议方向矛盾（矛盾时改五看三定）。详见 [references/report-synthesis.md](references/report-synthesis.md)
+- **边界**：SWOT 与五看三定正文**不得**并入 `决策摘要.md`。Step 8 **不强制**读取 `swot分析.md`。五看三定取向**必须**读取 `五看三定.md`；其他取向不强制
 
 ## Step 8：调研输出（交互闸门）
 
 **逐步确认**：仍一次一题（禁止一张表两题连发）。末项均为「其他（请补充）」。
-1. **报告取向**（多选）：决策导向 / 科普导向 / 投资人导向；推荐与调研目的对齐（技术选型→决策导向）。
+1. **报告取向**（多选）：决策导向 / 科普导向 / 投资人导向；第一方另加 **五看三定**。推荐与调研目的对齐（技术选型→决策导向），**不默认包含五看三定**。中立模式的选项里不出现五看三定。
 2. **是否生成信息图**（单选）：生成 / 跳过；推荐跳过。跳过则不再问 style/aspect。信息图仅作 `output/infographics/` 参考，**不嵌入**报告。
 
 若用户选择「生成」，再各问一题：
 3. **信息图 style**（单选）：推荐 `pop-laboratory`；备选 `morandi-journal` / `corporate-memphis` / `craft-handmade`
 4. **信息图 aspect**（单选）：推荐 `landscape`；备选 `portrait` / `square`
 
-**Lazy**：不问。默认 `报告取向` = 决策导向；`生成信息图` = 否。基调中标注 Lazy 默认。
+**Lazy**：不问 Step 8。`生成信息图` = 否。中立：`报告取向` = 决策导向，不产生五看三定。第一方：`报告取向` = 决策导向 + 五看三定（同时写源文件与长报告，因为不再问 Step 8）。基调中标注 Lazy 默认，立场保持进入 Lazy 前已确认的值。
 
 写入 `调研基调.md`：`报告取向`、`生成信息图`（是/否）、`信息图_style`（若生成）、`信息图_aspect`（若生成，默认 landscape）。
 
@@ -174,6 +177,7 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 | 决策导向 | 方案选项 + 我方建议 | Step 7 决策综合 | `templates/report/报告-决策导向.md` |
 | 科普导向 | 技术路线解释 + 对我方含义 | Step 5 技术分析 | `templates/report/报告-科普导向.md` |
 | 投资人导向 | 市场窗口 + 风险 | Step 6 商业机会 | `templates/report/报告-投资人导向.md` |
+| 五看三定 | 五看判断 + 三定 | `五看三定.md` | `templates/report/报告-五看三定.md` |
 
 ### 信息图生成（可选）
 
@@ -220,6 +224,7 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 - [ N ] Step 5 技术分析
 - [ N ] Step 6 商业机会
 - [ N ] Step 7 决策综合 + SWOT（`决策摘要.md` + `swot分析.md`）
+- [ N ] Step 7 五看三定（`五看三定.md`；中立模式记「不适用」并标 [ Y ]）
 - [ N ] Step 8 报告输出
 ```
 
@@ -227,11 +232,11 @@ AI 硬件迭代快，Step 3–7 检索与引用**必须**遵守：
 ## 续跑与单步执行
 
 - 用户说「继续调研」：读 `进度.md`。若 `交互模式：Lazy` 且流程未完成 → 不重新问 Lazy，按推荐值接着跑完。若 `Step 0 状态：待确认`（逐步确认）→ 读 `调研意图.md` 续问 Step 0，不重头；否则从当前步骤续跑。
-- 用户说「改成 Lazy / 全自动」：写入 `交互模式：Lazy`，未确认闸门用推荐值补齐并连跑至 Step 8。
+- 用户说「改成 Lazy / 全自动」：已确认立场保持不变；若尚无立场，先补问再进入。未确认闸门用推荐值补齐并连跑至 Step 8。第一方的报告取向含五看三定，中立不含。
 - 用户指定步骤（如「只跑 Step 3」）：检查前置产出是否存在，缺失则提示先完成依赖步骤。
-- 用户说「重做 Step 0」：重新生成 `调研意图.md` + `调研基调.md`（见 [intent-discovery.md](references/intent-discovery.md) §G）。
-- 用户说「重做 Step 7」：保留 Step 0–6 产出，按 [report-synthesis.md](references/report-synthesis.md) 重生 `决策摘要.md` 与 `swot分析.md`。
-- 用户说「重做 Step 8」：保留 Step 0–7 产出，按 [report-synthesis.md](references/report-synthesis.md) 与 `templates/report/` 重生成大纲/报告；若 `调研基调.md` 中 `生成信息图` 为是，另按 [infographic-rules.md](references/infographic-rules.md) 重生成信息图（先跑 `ensure-optional-deps.sh --only baoyu-infographic`）。
+- 用户说「重做 Step 0」：重新生成 `调研意图.md` + `调研基调.md`；先重问分析师立场，再重问 Lazy（除非用户同时说保持立场或保持 Lazy/逐步确认）。
+- 用户说「重做 Step 7」：保留 Step 0–6 产出，按 [report-synthesis.md](references/report-synthesis.md) 重生 `决策摘要.md` 与 `swot分析.md`；第一方另重生 `五看三定.md`，中立则不写并在进度记「不适用」。
+- 用户说「重做 Step 8」：保留 Step 0–7 产出，按 [report-synthesis.md](references/report-synthesis.md) 与 `templates/report/` 重生成大纲/报告；若取向含五看三定，须已有 `五看三定.md`。若 `调研基调.md` 中 `生成信息图` 为是，另按 [infographic-rules.md](references/infographic-rules.md) 重生成信息图（先跑 `ensure-optional-deps.sh --only baoyu-infographic`）。
 
 ## 参考
 

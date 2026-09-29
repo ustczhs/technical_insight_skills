@@ -3,7 +3,7 @@
 本仓库是**技术规划 skill 的集合**：各能力簇独立可调用，产出互不影响；因理念一致、风格统一而放在一起，便于维护与后续扩展。  
 不是总流水线；簇与簇之间无必然耦合。某一簇内部若有多段流程（例如选型 Brief → Shortlist），属于该簇自己的契约。
 
-领域术语：各簇/skill 自管（选型见 [skills/soc-selection/CONTEXT.md](./skills/soc-selection/CONTEXT.md)；技术树见 [skills/grow-a-tech-tree/CONTEXT.md](./skills/grow-a-tech-tree/CONTEXT.md)；需求评审见 [skills/requirements-review/CONTEXT.md](./skills/requirements-review/CONTEXT.md)；项目档案见 [skills/project-dossier/CONTEXT.md](./skills/project-dossier/CONTEXT.md)）。本文件只定义**包级公约**。
+领域术语：各簇/skill 自管（选型见 [skills/soc-selection/CONTEXT.md](./skills/soc-selection/CONTEXT.md)；技术树见 [skills/grow-a-tech-tree/CONTEXT.md](./skills/grow-a-tech-tree/CONTEXT.md)；调研见 [skills/hardware-insight/CONTEXT.md](./skills/hardware-insight/CONTEXT.md)；需求评审见 [skills/requirements-review/CONTEXT.md](./skills/requirements-review/CONTEXT.md)；项目档案见 [skills/project-dossier/CONTEXT.md](./skills/project-dossier/CONTEXT.md)）。本文件只定义**包级公约**。
 
 ## Language
 

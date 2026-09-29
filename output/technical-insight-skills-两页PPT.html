@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Planning Skills · 现状与未来规划</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    flex-shrink: 0;
+  }
+  .slide::before { content: ""; position: absolute; top: 0; left: 0; width: 8px; height: 100%; background: linear-gradient(180deg,#0066ff,#00c6ff); }
+  .slide-header { padding: 36px 64px 0 72px; display: flex; align-items: flex-end; justify-content: space-between; }
+  .slide-title { font-size: 36px; font-weight: 700; color: #0d1b3e; letter-spacing: 1px; }
+  .slide-subtitle { font-size: 16px; color: #6b7a99; margin-top: 8px; letter-spacing: 2px; }
+  .slide-tag { font-size: 14px; color: #0066ff; background: rgba(0,102,255,.08); padding: 8px 20px; border-radius: 20px; font-weight: 600; letter-spacing: 1px; }
+  .divider { margin: 16px 72px 0; height: 2px; background: linear-gradient(90deg,#0066ff 0%,#00c6ff 40%,transparent 100%); }
+  .slide-footer { position: absolute; bottom: 20px; left: 72px; right: 64px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #9aa5bd; letter-spacing: 1px; }
+
+  /* slide 1 */
+  .status-body { padding: 24px 72px 48px; display: flex; gap: 28px; height: calc(720px - 130px); }
+  .status-left { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .status-card { flex: 1; border-radius: 14px; padding: 18px 28px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  .status-card.blue { background: linear-gradient(135deg,#0066ff 0%,#0052cc 100%); color: #fff; }
+  .status-card.cyan { background: linear-gradient(135deg,#00b4d8 0%,#0077b6 100%); color: #fff; }
+  .status-card.dark { background: linear-gradient(135deg,#1a2a4a 0%,#0d1b3e 100%); color: #fff; }
+  .card-icon { font-size: 28px; margin-bottom: 6px; opacity: .9; }
+  .card-title { font-size: 20px; font-weight: 700; margin-bottom: 7px; letter-spacing: 1px; }
+  .card-desc { font-size: 13.5px; line-height: 1.6; opacity: .92; }
+  .card-num { position: absolute; right: 20px; top: 14px; font-size: 52px; font-weight: 800; opacity: .15; line-height: 1; }
+  .status-right { width: 370px; background: #f5f8ff; border-radius: 14px; padding: 24px 26px; display: flex; flex-direction: column; }
+  .right-title { font-size: 18px; font-weight: 700; color: #0d1b3e; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #e0e8f5; }
+  .highlight-item { display: flex; gap: 14px; margin-bottom: 15px; align-items: flex-start; }
+  .highlight-dot { width: 8px; height: 8px; border-radius: 50%; background: #0066ff; margin-top: 7px; flex-shrink: 0; }
+  .highlight-text { font-size: 13px; color: #3a4a6b; line-height: 1.6; }
+  .highlight-text strong { color: #0d1b3e; font-weight: 700; }
+  .summary-box { margin-top: auto; background: linear-gradient(135deg,#0066ff,#00c6ff); border-radius: 10px; padding: 16px 20px; color: #fff; }
+  .sum-label { font-size: 11px; opacity: .85; letter-spacing: 2px; margin-bottom: 5px; }
+  .sum-text { font-size: 13.5px; line-height: 1.6; font-weight: 500; }
+
+  /* slide 2 */
+  .plan-body { padding: 24px 72px 0; height: calc(720px - 160px); }
+  .phase-row { display: flex; gap: 14px; margin-bottom: 14px; }
+  .phase-label { width: 130px; flex-shrink: 0; border-radius: 10px; padding: 12px; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .ph-num { font-size: 11px; opacity: .8; letter-spacing: 1px; margin-bottom: 4px; }
+  .ph-name { font-size: 15px; font-weight: 700; letter-spacing: 1px; line-height: 1.35; }
+  .phase-content { flex: 1; background: #f5f8ff; border-radius: 10px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .plan-tag { display: inline-block; background: #fff; border: 1px solid #d0dcf0; color: #2a3a5e; font-size: 12.5px; padding: 6px 12px; border-radius: 6px; white-space: nowrap; font-weight: 500; }
+  .plan-tag.key { background: #e8f0fe; border-color: #8ab4f8; color: #1a56c2; font-weight: 600; }
+  .plan-tag.hot { background: #fff3e0; border-color: #ffcc80; color: #e65100; font-weight: 600; }
+  .g1 { background: linear-gradient(135deg,#1e88e5,#1565c0); }
+  .g2 { background: linear-gradient(135deg,#00acc1,#00838f); }
+  .g3 { background: linear-gradient(135deg,#43a047,#2e7d32); }
+  .g4 { background: linear-gradient(135deg,#8e24aa,#6a1b9a); }
+  .roadmap-bar { margin-top: 17px; display: flex; border-radius: 8px; overflow: hidden; height: 38px; }
+  .road-seg { flex: 1; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+  .s1 { background: #0066ff; } .s2 { background: #00acc1; } .s3 { background: #7b1fa2; }
+  .road-seg .arrow { margin-left: 8px; opacity: .7; }
+</style>
+</head>
+<body>
+
+<!-- ========== 第一页：现状 ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-title">技术规划模块 · AI应用现状</div>
+      <div class="slide-subtitle">FROM SCATTERED INFORMATION TO HARDWARE DECISIONS</div>
+    </div>
+    <div class="slide-tag">现状 / STATUS</div>
+  </div>
+  <div class="divider"></div>
+  <div class="status-body">
+    <div class="status-left">
+      <div class="status-card blue">
+        <div class="card-num">01</div><div class="card-icon">🔍</div>
+        <div class="card-title">Hardware Insight · 结构化调研</div>
+        <div class="card-desc">以智能硬件为主线，覆盖竞品拆解、技术路线、商业机会与决策综合；按 Step 0–8 将问题逐步沉淀为可执行报告。</div>
+      </div>
+      <div class="status-card cyan">
+        <div class="card-num">02</div><div class="card-icon">🧩</div>
+        <div class="card-title">7 个独立可调用 Skill</div>
+        <div class="card-desc">项目档案、硬件调研、跨域机会、SoC 选型、技术树、需求评审各自成簇，按需安装、按需组合，不强制串成一条流水线。</div>
+      </div>
+      <div class="status-card dark">
+        <div class="card-num">03</div><div class="card-icon">🛡️</div>
+        <div class="card-title">证据与过程可控</div>
+        <div class="card-desc">Project Dossier Gate、逐步确认 / Lazy 双模式、A/B/C 证据分级、近 12 个月时效要求与进度续跑，保证结论可追溯。</div>
+      </div>
+    </div>
+    <div class="status-right">
+      <div class="right-title">当前能力画像</div>
+      <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text"><strong>覆盖完整</strong>：从问题定调到报告输出，形成一条闭环研究链。</div></div>
+      <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text"><strong>决策导向</strong>：竞品、技术、商业三条分析线最终汇聚到决策摘要和 SWOT。</div></div>
+      <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text"><strong>质量内建</strong>：信息时效、来源等级、双源交叉和人工闸门写入流程规则。</div></div>
+      <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text"><strong>形态偏文件</strong>：当前主要交付 Markdown；信息图可选，原 HTML Deck 构建链已归档。</div></div>
+      <div class="summary-box"><div class="sum-label">整体判断</div><div class="sum-text">已经解决“如何规范地做硬件调研”，下一步是解决“如何让研究能力持续在线、被更多人协同使用”。</div></div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>TCL 鸿鹄实验室 · 研发平台部 · 项目效能模块</span><span>01 / 02</span></div>
+</div>
+
+<!-- ========== 第二页：未来规划 ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-title">技术规划模块 · AI提效规划</div>
+      <div class="slide-subtitle">FROM FILE-BASED SKILLS TO WEB &amp; DIGITAL EMPLOYEE</div>
+    </div>
+    <div class="slide-tag">规划 / ROADMAP</div>
+  </div>
+  <div class="divider"></div>
+  <div class="plan-body">
+    <div class="phase-row"><div class="phase-label g1"><div class="ph-num">STAGE 01</div><div class="ph-name">Web 工作台<br>可视化承接</div></div><div class="phase-content"><span class="plan-tag key">项目 / 课题看板</span><span class="plan-tag key">Step 0–8 状态可视化</span><span class="plan-tag">竞品 / 技术 / 商业卡片</span><span class="plan-tag">来源与时间戳追溯</span><span class="plan-tag hot">一键生成报告与汇报页</span></div></div>
+    <div class="phase-row"><div class="phase-label g2"><div class="ph-num">STAGE 02</div><div class="ph-name">数字员工<br>自然语言入口</div></div><div class="phase-content"><span class="plan-tag key">一句话发起调研</span><span class="plan-tag">自动识别课题与项目</span><span class="plan-tag key">高风险步骤逐题确认</span><span class="plan-tag">低风险任务 Lazy 执行</span><span class="plan-tag hot">主动提醒过期证据</span></div></div>
+    <div class="phase-row"><div class="phase-label g3"><div class="ph-num">STAGE 03</div><div class="ph-name">知识资产<br>持续复用</div></div><div class="phase-content"><span class="plan-tag key">跨项目竞品知识库</span><span class="plan-tag">技术路线与器件复用</span><span class="plan-tag">模板 / Skill 版本管理</span><span class="plan-tag key">反馈闭环优化流程</span><span class="plan-tag">团队经验自动沉淀</span></div></div>
+    <div class="phase-row"><div class="phase-label g4"><div class="ph-num">STAGE 04</div><div class="ph-name">组织化运营<br>可信可审计</div></div><div class="phase-content"><span class="plan-tag key">权限与角色体系</span><span class="plan-tag">全链路操作审计</span><span class="plan-tag">API / 企业 IM 接入</span><span class="plan-tag hot">待证事项与里程碑管理</span><span class="plan-tag">质量指标持续监控</span></div></div>
+    <div class="roadmap-bar"><div class="road-seg s1">P1 工作台 MVP · 0–3 个月<span class="arrow">▶</span></div><div class="road-seg s2">P2 数字员工 · 3–6 个月<span class="arrow">▶</span></div><div class="road-seg s3">P3 组织运营 · 6–12 个月</div></div>
+  </div>
+  <div class="slide-footer"><span>TCL 鸿鹄实验室 · 研发平台部 · 项目效能模块</span><span>02 / 02</span></div>
+</div>
+
+</body>
+</html>
